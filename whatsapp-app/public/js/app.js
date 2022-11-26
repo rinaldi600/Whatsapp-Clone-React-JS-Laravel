@@ -3380,11 +3380,11 @@ function Home() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "min-h-screen",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "bg-[#00A884] min-h-[250px]",
+      className: "bg-[#00A884] h-[80px] md:min-h-[250px]",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         className: "h-[80px]",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          className: "h-full max-w-[1100px] bg-yellow-500 mx-auto",
+          className: "h-full w-full md:w-[80%] xl:w-[1100px] mx-auto",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
             className: "flex h-full items-center gap-2",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("svg", {
@@ -3407,9 +3407,35 @@ function Home() {
         })
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "bg-yellow-500 min-h-screen relative",
+      className: "bg-white flex justify-center min-h-screen relative font-segoiUI",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        className: "max-w-[1100px] bg-blue-500 min-h-[880px] mx-auto"
+        className: "w-full md:w-[80%] overflow-hidden shadow-[0_3px_8px_rgba(0,0,0,0.24)] md:rounded-lg bg-white md:absolute md:top-[-100px] xl:w-[1100px] min-h-[700px]",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "min-h-[550px] md:min-h-[350px] flex items-stretch md:flex-row flex-col",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "w-full min-h-[275px] text-[#41525d] md:min-h-max md:w-[70%]",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "max-w-[550px]",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+                className: "sm:text-2xl text-xl font-light",
+                children: "Untuk menggunakan WhatsApp di komputer Anda:"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ol", {
+                  className: "list-decimal list-inside text-base md:text-lg",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                    children: "Buka WhatsApp di telepon Anda"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                    children: "Buka WhatsApp di telepon Anda"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                    children: "Buka WhatsApp di telepon Anda"
+                  })]
+                })
+              })]
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "w-full min-h-[275px] md:min-h-max md:w-[30%] bg-blue-300"
+          })]
+        })
       })
     })]
   });
