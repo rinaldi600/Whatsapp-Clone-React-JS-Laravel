@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,10 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Home');
 });
+
+Route::get('/auth/google',[UserController::class,'redirectGoogle'])->middleware('cors');
+Route::get('/auth/google/callback',[UserController::class,'handleGoogleCallback']);
+
 
 //Route::get('/dashboard', function () {
 //    return Inertia::render('Dashboard');

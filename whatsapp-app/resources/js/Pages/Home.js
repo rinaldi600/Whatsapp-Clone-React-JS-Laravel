@@ -1,8 +1,11 @@
 import React from "react";
 import DummyQRCode from '../../img/qr-code-bc94057f452f4806af70fd34540f72ad.png';
 import GoogleLogo from '../../img/google.png';
+import { Link } from "@inertiajs/inertia-react";
 
 function Home() {
+
+
     return (
         <div className={"min-h-screen"}>
             <div className={"bg-[#00A884] h-[80px] md:min-h-[250px]"}>
@@ -15,7 +18,6 @@ function Home() {
                     </div>
                 </div>
             </div>
-
             <div className={"bg-[#F0F2F5] flex justify-center min-h-screen relative font-segoiUI"}>
                 <div className={"w-full md:w-[80%] overflow-hidden shadow-[0_3px_8px_rgba(0,0,0,0.24)] md:rounded-lg bg-white md:absolute md:top-[-100px] xl:w-[1100px] min-h-[700px]"}>
                     <div className={"min-h-[550px] md:min-h-[350px] flex items-stretch md:flex-row flex-col"}>
@@ -40,9 +42,9 @@ function Home() {
                         <div className={"w-full min-h-[275px] md:min-h-max md:w-[30%] bg-blue-300 relative"}>
                             <img className={"w-full h-full"} src={DummyQRCode} alt="Dummy QR Code"/>
                             <div className={"absolute flex justify-center items-center shadow-xl inset-0 top-1/2 left-1/2 translate-y-[-50%] translate-x-[-50%]"}>
-                                <button className={"w-[40px] h-[40px] rounded-full shadow-xl bg-white"}>
+                                <a href={'/auth/google'} className={"w-[40px] h-[40px] flex items-center justify-center rounded-full shadow-xl bg-white"}>
                                     <img className={"ml-auto mr-auto block"} src={GoogleLogo} alt=""/>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
