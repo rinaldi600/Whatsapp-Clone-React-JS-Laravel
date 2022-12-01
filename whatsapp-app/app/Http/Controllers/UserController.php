@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use http\Exception;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -17,7 +15,9 @@ class UserController extends Controller
 
     public function handleGoogleCallback() {
         $user = Socialite::driver('google')->user();
-        return Inertia::render('Dashboard');
+        dd($user->getEmail() . ' | ' . $user->getName() . ' | ' . $user->getAvatar() . ' | ' . $user->getId()
+            . ' | ' . $user->getNickname());
+//        return Inertia::location('/user');
     }
 
 }

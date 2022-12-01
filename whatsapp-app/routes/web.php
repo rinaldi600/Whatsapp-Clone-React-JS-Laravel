@@ -25,8 +25,8 @@ Route::get('/auth/google',[UserController::class,'redirectGoogle'])->middleware(
 Route::get('/auth/google/callback',[UserController::class,'handleGoogleCallback']);
 
 
-//Route::get('/dashboard', function () {
-//    return Inertia::render('Dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/user', function () {
+    return Inertia::render('Dashboard');
+});
 
 require __DIR__.'/auth.php';
