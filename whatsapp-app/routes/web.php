@@ -26,7 +26,11 @@ Route::get('/auth/google/callback',[UserController::class,'handleGoogleCallback'
 
 
 Route::get('/user', function () {
-    return Inertia::render('Dashboard');
-});
+    return Inertia::render('Dashboard',[
+        'user' => \Illuminate\Support\Facades\Auth::user()
+    ]);
+})->middleware('authUserLogin');
+
+Route::post('/logout',[UserController::class,'logout']);
 
 require __DIR__.'/auth.php';

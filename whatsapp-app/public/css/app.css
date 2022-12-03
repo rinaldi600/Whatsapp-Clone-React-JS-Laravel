@@ -787,9 +787,6 @@ select {
 .h-\[40px\] {
   height: 40px;
 }
-.h-\[\] {
-  height: ;
-}
 .h-\[314px\] {
   height: 314px;
 }
@@ -804,9 +801,6 @@ select {
 }
 .min-h-\[275px\] {
   min-height: 275px;
-}
-.min-h-\[150px\] {
-  min-height: 150px;
 }
 .min-h-\[350px\] {
   min-height: 350px;
@@ -849,9 +843,6 @@ select {
 }
 .max-w-\[550px\] {
   max-width: 550px;
-}
-.max-w-\[\] {
-  max-width: ;
 }
 .max-w-\[560px\] {
   max-width: 560px;
@@ -1037,12 +1028,13 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(147 197 253 / var(--tw-bg-opacity));
 }
-.bg-\[\] {
-  background-color: ;
-}
 .bg-\[\#F9F9FA\] {
   --tw-bg-opacity: 1;
   background-color: rgb(249 249 250 / var(--tw-bg-opacity));
+}
+.bg-red-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
 }
 .fill-current {
   fill: currentColor;
