@@ -1,20 +1,17 @@
 import React, {useEffect, lazy, Suspense, useState} from 'react';
 import HeadComponent from "@/Pages/Head/Head";
-import {Inertia} from "@inertiajs/inertia";
 
 const Navbar = lazy(() => import('../Pages/Navbar/Navbar'));
 
 export default function Dashboard({user}) {
 
     const [navbarBoxStatus, setNavbarStatus] = useState(false);
+    const [icon, setIconInput] = useState(false);
 
     useEffect(() => {
        console.log(user)
     });
 
-    const logout = () => {
-        Inertia.post('/logout');
-    };
 
     const showNavbar = () => {
         if (!navbarBoxStatus) {
@@ -24,18 +21,23 @@ export default function Dashboard({user}) {
         }
     };
 
+    const getValue = (e) => {
+        console.log(e.target.value);
+    };
+
     return (
         <div className={"relative"}>
             <HeadComponent/>
             <div className={"h-[80px] bg-[#00A783]"}>
 
             </div>
-            <div className={"min-h-[680px] bg-[#DFDFDC]"}>
+            <div className={"min-h-[680px] bg-[#DFDFDC] font-segoiUI"}>
                 <div className={"flex mobile:flex-col shadow-[0_2px_8px_0px_rgba(99,99,99,0.2)] w-full mobile:h-full sm:h-full xl:w-[95%] bg-white xl:h-[700px] mx-auto absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%]"}>
-                    <div className={"w-[30%] relative border-r-[1px] border-[#E9EDEF] mobile:w-full bg-white mobile:h-[50%] sm:min-h-full"}>
-                        <div className={"min-h-[59px] bg-[#F0F2F5] gap-2 flex flex-wrap pl-2 pr-2 items-center justify-between"}>
+                    <div className={"w-[30%] overflow-hidden relative border-r-[1px] border-[#E9EDEF] mobile:w-full bg-white mobile:h-[50%] sm:min-h-full"}>
+
+                        <div className={"min-h-[59px] p-2 bg-[#F0F2F5] gap-2 flex flex-wrap pl-2 pr-2 items-center justify-between"}>
                             <div className={"w-[40px] h-[40px] rounded-full bg-red-300 overflow-hidden"}>
-                                <img className={"w-full h-full"} src={user.photo_profile} alt=""/>
+                                <img className={"w-full h-full"} src={user?.photo_profile} alt=""/>
                             </div>
                             <div className={"flex flex-wrap gap-5 items-center justify-center"}>
                                 <div className={"cursor-pointer"}>
@@ -68,13 +70,33 @@ export default function Dashboard({user}) {
                                 <Navbar/>
                             </div>
                         </Suspense>
-                        <h1>WORK</h1>
-                        <button onClick={logout} className={"bg-red-300"}>
-                            LogOut
-                        </button>
+
+                        <div className={"h-[50px] p-2 border-b border-[#E9EDEF] flex justify-center items-center"}>
+                            <div className={"w-[375px] p-2 items-center flex h-[35px] bg-[#F0F2F5] rounded-[8px]"}>
+                                <div className={"text-[#54656F]"}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         stroke-width="1.5" stroke="currentColor" className={`${icon ? 'hidden' : 'block'} w-6 h-6`}>
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         stroke-width="1.5" stroke="currentColor" className={`${icon ? 'block' : 'hidden'} w-6 h-6`}>
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
+                                    </svg>
+                                </div>
+                                <div className={"w-full overflow-hidden"}>
+                                    <input onChange={(e) => getValue(e)} onBlur={() => setIconInput(false)} onClick={() => setIconInput(true)} type="text" className={"focus:border-transparent focus:ring-0 w-full bg-transparent outline-none border-none h-full text-[15px]"} placeholder={"Cari atau mulai chat baru"}/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className={"overflow-y-scroll h-[700px] bg-red-300"}>
+
+                        </div>
+
                     </div>
                     <div className={"w-[70%] mobile:w-full bg-[#F0F2F5] mobile:h-[50%] sm:min-h-full"}>
-
                     </div>
                 </div>
             </div>

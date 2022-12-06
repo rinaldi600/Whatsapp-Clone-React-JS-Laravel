@@ -17,26 +17,22 @@ class UserController extends Controller
     }
 
     public function handleGoogleCallback(Request $request) {
-        try {
-            $user = Socialite::driver('google')->user();
-            $getUserLoginCurrent = User::where('email', $user->getEmail())->first();
+        $user = Socialite::driver('google')->stateless()->user();
+        $getUserLoginCurrent = User::where('email', $user->getEmail())->first();
 
-            if (empty($getUserLoginCurrent)) {
-                $newUser = User::create([
-                    'id_user' => 'USER - ' . date('YmdHis', time()) . microtime(true),
-                    'name' => $user->getName(),
-                    'email' => $user->getEmail(),
-                    'photo_profile' => $user->getAvatar(),
-                ]);
-                Auth::login($newUser);
-            } else {
-                Auth::login($getUserLoginCurrent);
-            }
-            $request->session()->regenerate();
-            return Inertia::location('/user');
-        } catch (InvalidStateException $exception) {
-            dd($exception->getMessage());
+        if (empty($getUserLoginCurrent)) {
+            $newUser = User::create([
+                'id_user' => 'USER - ' . date('YmdHis', time()) . microtime(true),
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'photo_profile' => $user->getAvatar(),
+            ]);
+            Auth::login($newUser);
+        } else {
+            Auth::login($getUserLoginCurrent);
         }
+        $request->session()->regenerate();
+        return Inertia::location('/user');
     }
 
     public function logout(Request $request) {
