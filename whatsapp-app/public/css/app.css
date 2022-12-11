@@ -672,9 +672,6 @@ select {
 .left-1\/2 {
   left: 50%;
 }
-.top-\[200px\] {
-  top: 200px;
-}
 .z-0 {
   z-index: 0;
 }
@@ -751,6 +748,9 @@ select {
 .mr-auto {
   margin-right: auto;
 }
+.mt-5 {
+  margin-top: 1.25rem;
+}
 .block {
   display: block;
 }
@@ -820,11 +820,8 @@ select {
 .h-\[200px\] {
   height: 200px;
 }
-.h-\[680px\] {
-  height: 680px;
-}
-.h-\[7700px\] {
-  height: 7700px;
+.h-\[45px\] {
+  height: 45px;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -847,8 +844,9 @@ select {
 .min-h-\[350px\] {
   min-height: 350px;
 }
-.min-h-\[7700px\] {
-  min-height: 7700px;
+.min-h-fit {
+  min-height: -moz-fit-content;
+  min-height: fit-content;
 }
 .w-5 {
   width: 1.25rem;
@@ -891,6 +889,12 @@ select {
 }
 .w-\[70\%\] {
   width: 70%;
+}
+.w-\[45px\] {
+  width: 45px;
+}
+.w-\[360px\] {
+  width: 360px;
 }
 .max-w-xl {
   max-width: 36rem;
@@ -1145,6 +1149,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(249 249 250 / var(--tw-bg-opacity));
 }
+.bg-red-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
+}
 .fill-current {
   fill: currentColor;
 }
@@ -1242,9 +1250,6 @@ select {
 .pt-10 {
   padding-top: 2.5rem;
 }
-.pb-2 {
-  padding-bottom: 0.5rem;
-}
 .text-left {
   text-align: left;
 }
@@ -1279,6 +1284,10 @@ select {
 }
 .text-\[15px\] {
   font-size: 15px;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 .font-medium {
   font-weight: 500;
@@ -1502,6 +1511,12 @@ select {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+.hover\:rounded-\[10px\]:hover {
+  border-radius: 10px;
+}
+.hover\:rounded-\[5px\]:hover {
+  border-radius: 5px;
+}
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -1517,6 +1532,16 @@ select {
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+.hover\:bg-\[\#\#F5F6F6\]:hover {
+  background-color: ##F5F6F6;
+}
+.hover\:bg-\[\#F5F6F6\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 246 246 / var(--tw-bg-opacity));
+}
+.hover\:p-2:hover {
+  padding: 0.5rem;
 }
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
@@ -1886,14 +1911,6 @@ select {
 
   .xl\:h-\[700px\] {
     height: 700px;
-  }
-
-  .xl\:h-\[1700px\] {
-    height: 1700px;
-  }
-
-  .xl\:h-screen {
-    height: 100vh;
   }
 
   .xl\:w-\[95\%\] {
