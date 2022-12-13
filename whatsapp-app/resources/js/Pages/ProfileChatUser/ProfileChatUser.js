@@ -1,8 +1,19 @@
 import React from "react";
+import {show, close} from "@/features/modalBox";
+import { useSelector, useDispatch } from 'react-redux'
 
 function ProfileChatUser({profile, name}) {
+
+    const box = useSelector(state => state.modalBox.value);
+    const dispatch = useDispatch();
+
+    const chatUser = () => {
+        console.log("TEST");
+        dispatch(box ? close() : show());
+    };
+
     return (
-        <div className={"flex hover:bg-[#F5F6F6] hover:rounded-[5px] hover:p-2 gap-3 items-center cursor-pointer bg-white"}>
+        <div onClick={chatUser} className={"flex hover:bg-[#F5F6F6] hover:rounded-[5px] hover:p-2 gap-3 items-center cursor-pointer bg-white"}>
             <div className={"w-[45px] h-[45px] overflow-hidden rounded-full bg-yellow-400"}>
                 <img className={"w-full h-full"} src={profile} alt=""/>
             </div>

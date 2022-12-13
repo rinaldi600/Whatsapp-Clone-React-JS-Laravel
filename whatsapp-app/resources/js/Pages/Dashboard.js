@@ -1,15 +1,18 @@
 import React, {useEffect, lazy, Suspense, useState} from 'react';
 import HeadComponent from "@/Pages/Head/Head";
 import LoadingProfileImage from '../../img/load.png';
+import { useSelector } from 'react-redux'
 import ProfileChatUser from "@/Pages/ProfileChatUser/ProfileChatUser";
 
 const Navbar = lazy(() => import('../Pages/Navbar/Navbar'));
+const Chat = lazy(() => import('../Components/Chat/Chat'));
 
 export default function Dashboard({user}) {
 
     const [navbarBoxStatus, setNavbarStatus] = useState(false);
     const [icon, setIconInput] = useState(false);
     const [sticky, setSticky] = useState(false);
+    const box = useSelector(state => state.modalBox.value);
 
     useEffect(() => {
        console.log(user)
@@ -47,7 +50,7 @@ export default function Dashboard({user}) {
                         <div className={`${sticky ? 'sm:absolute z-50 w-full bg-white' : ''}`}>
                             <div className={"min-h-[59px] p-2 bg-[#F0F2F5] gap-2 flex flex-wrap pl-2 pr-2 items-center justify-between"}>
                                 <div className={"w-[40px] h-[40px] rounded-full bg-red-300 overflow-hidden"}>
-                                    <img className={"w-full h-full"} src={user.photo_profile ?? `${LoadingProfileImage}`} alt=""/>
+                                    <img referrerpolicy="no-referrer" className={"w-full h-full"} src={user.photo_profile ?? `${LoadingProfileImage}`} alt=""/>
                                 </div>
                                 <div className={"flex flex-wrap gap-5 items-center justify-center"}>
                                     <div className={"cursor-pointer"}>
@@ -118,9 +121,12 @@ export default function Dashboard({user}) {
                         </div>
 
                     </div>
-                    
-                    <div className={"w-[70%] flex justify-center items-center mobile:w-full bg-[#F0F2F5] mobile:h-[50%] sm:min-h-full"}>
-                        <div>
+
+                    <div className={"w-[70%] relative flex justify-center items-center mobile:w-full bg-[#F0F2F5] mobile:h-[50%] sm:min-h-full"}>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <Chat/>
+                        </Suspense>
+                        <div className={`${box ? 'hidden' : 'block'}`}>
                             <svg viewBox="0 0 303 172" preserveAspectRatio="xMidYMid meet" className="mx-auto text-center"
                                  fill="none">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
