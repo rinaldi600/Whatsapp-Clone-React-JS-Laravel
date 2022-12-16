@@ -633,9 +633,6 @@ select {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
-.static {
-  position: static;
-}
 .fixed {
   position: fixed;
 }
@@ -678,6 +675,24 @@ select {
 .bottom-0 {
   bottom: 0px;
 }
+.top-\[-1px\] {
+  top: -1px;
+}
+.bottom-full {
+  bottom: 100%;
+}
+.right-full {
+  right: 100%;
+}
+.bottom-\[50\%\] {
+  bottom: 50%;
+}
+.right-1 {
+  right: 0.25rem;
+}
+.top-1 {
+  top: 0.25rem;
+}
 .z-0 {
   z-index: 0;
 }
@@ -686,9 +701,6 @@ select {
 }
 .z-40 {
   z-index: 40;
-}
-.clear-both {
-  clear: both;
 }
 .mx-auto {
   margin-left: auto;
@@ -829,6 +841,12 @@ select {
 .h-\[45px\] {
   height: 45px;
 }
+.h-\[600px\] {
+  height: 600px;
+}
+.h-\[100px\] {
+  height: 100px;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -849,9 +867,6 @@ select {
 }
 .min-h-\[350px\] {
   min-height: 350px;
-}
-.min-h-\[100px\] {
-  min-height: 100px;
 }
 .w-5 {
   width: 1.25rem;
@@ -1009,9 +1024,6 @@ select {
 }
 .overflow-hidden {
   overflow: hidden;
-}
-.overflow-visible {
-  overflow: visible;
 }
 .overflow-scroll {
   overflow: scroll;
@@ -1776,6 +1788,10 @@ select {
 
   .sm\:w-\[193px\] {
     width: 193px;
+  }
+
+  .sm\:w-\[192px\] {
+    width: 192px;
   }
 
   .sm\:max-w-md {

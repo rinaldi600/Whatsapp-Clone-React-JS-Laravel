@@ -107,16 +107,8 @@ export default function Dashboard({user}) {
 
                         <div onScroll={(e) => getValue(e)} className={"overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2"}>
 
-                            <ProfileChatUser profile={user.photo_profile} name={user.name}/>
-                            <ProfileChatUser profile={user.photo_profile} name={user.name}/>
-                            <ProfileChatUser profile={user.photo_profile} name={user.name}/>
-                            <ProfileChatUser profile={user.photo_profile} name={user.name}/>
-                            <ProfileChatUser profile={user.photo_profile} name={user.name}/>
-                            <ProfileChatUser profile={user.photo_profile} name={user.name}/>
-                            <ProfileChatUser profile={user.photo_profile} name={user.name}/>
-                            <ProfileChatUser profile={user.photo_profile} name={user.name}/>
-                            <ProfileChatUser profile={user.photo_profile} name={user.name}/>
-                            <ProfileChatUser profile={user.photo_profile} name={user.name}/>
+                            <ProfileChatUser profile={user.photo_profile} name={"Rinaldi"}/>
+                            <ProfileChatUser profile={user.photo_profile} name={"Doni"}/>
 
                         </div>
 

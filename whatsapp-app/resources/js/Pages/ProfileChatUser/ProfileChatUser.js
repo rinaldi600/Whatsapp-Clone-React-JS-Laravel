@@ -1,14 +1,12 @@
 import React from "react";
 import {show} from "@/features/modalBox";
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 function ProfileChatUser({profile, name}) {
 
-    const box = useSelector(state => state.modalBox.value);
     const dispatch = useDispatch();
 
     const chatUser = () => {
-        console.log("TEST");
         dispatch(show());
     };
 

@@ -5115,34 +5115,10 @@ function Dashboard(_ref) {
             className: "overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
               profile: user.photo_profile,
-              name: user.name
+              name: "Rinaldi"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
               profile: user.photo_profile,
-              name: user.name
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              profile: user.photo_profile,
-              name: user.name
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              profile: user.photo_profile,
-              name: user.name
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              profile: user.photo_profile,
-              name: user.name
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              profile: user.photo_profile,
-              name: user.name
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              profile: user.photo_profile,
-              name: user.name
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              profile: user.photo_profile,
-              name: user.name
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              profile: user.photo_profile,
-              name: user.name
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              profile: user.photo_profile,
-              name: user.name
+              name: "Doni"
             })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -5461,6 +5437,51 @@ function Home() {
 
 /***/ }),
 
+/***/ "./resources/js/Pages/NavbarChat/NavbarChat.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/Pages/NavbarChat/NavbarChat.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _features_modalBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/features/modalBox */ "./resources/js/features/modalBox.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+function NavbarChat() {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "text-[#3b4a54] font-[15px] bg-white grid justify-center items-center h-[200px] bg-white shadow-lg rounded-lg absolute top-1 right-1 sm:w-[192px] w-full",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+      children: "Info Kontak"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+      children: "Pilih Pesan"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+      children: "Pesan Berbintang"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+      children: "Pesan Sementara"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+      onClick: function onClick() {
+        return dispatch((0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.close)());
+      },
+      className: "text-left",
+      children: "Tutup Chat"
+    })]
+  });
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavbarChat);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Navbar/Navbar.js":
 /*!*********************************************!*\
   !*** ./resources/js/Pages/Navbar/Navbar.js ***!
@@ -5527,12 +5548,8 @@ __webpack_require__.r(__webpack_exports__);
 function ProfileChatUser(_ref) {
   var profile = _ref.profile,
     name = _ref.name;
-  var box = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
-    return state.modalBox.value;
-  });
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var chatUser = function chatUser() {
-    console.log("TEST");
     dispatch((0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.show)());
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -5566,41 +5583,6 @@ function ProfileChatUser(_ref) {
   });
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProfileChatUser);
-
-/***/ }),
-
-/***/ "./resources/js/Pages/ScreenTop/ScreenTop.js":
-/*!***************************************************!*\
-  !*** ./resources/js/Pages/ScreenTop/ScreenTop.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _img_load_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../img/load.png */ "./resources/img/load.png");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-function ScreenTop() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    className: "min-h-[59px] p-2 bg-[#F0F2F5] sticky top-0",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-      className: "w-[40px] h-[40px] rounded-full bg-white overflow-hidden",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-        referrerPolicy: "no-referrer",
-        className: "w-full h-full",
-        src: "".concat(_img_load_png__WEBPACK_IMPORTED_MODULE_0__["default"]),
-        alt: ""
-      })
-    })
-  });
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScreenTop);
 
 /***/ }),
 
@@ -63021,10 +63003,10 @@ var map = {
 	"./Home.js": "./resources/js/Pages/Home.js",
 	"./Navbar/Navbar": "./resources/js/Pages/Navbar/Navbar.js",
 	"./Navbar/Navbar.js": "./resources/js/Pages/Navbar/Navbar.js",
+	"./NavbarChat/NavbarChat": "./resources/js/Pages/NavbarChat/NavbarChat.js",
+	"./NavbarChat/NavbarChat.js": "./resources/js/Pages/NavbarChat/NavbarChat.js",
 	"./ProfileChatUser/ProfileChatUser": "./resources/js/Pages/ProfileChatUser/ProfileChatUser.js",
 	"./ProfileChatUser/ProfileChatUser.js": "./resources/js/Pages/ProfileChatUser/ProfileChatUser.js",
-	"./ScreenTop/ScreenTop": "./resources/js/Pages/ScreenTop/ScreenTop.js",
-	"./ScreenTop/ScreenTop.js": "./resources/js/Pages/ScreenTop/ScreenTop.js",
 	"./Welcome": "./resources/js/Pages/Welcome.js",
 	"./Welcome.js": "./resources/js/Pages/Welcome.js"
 };
