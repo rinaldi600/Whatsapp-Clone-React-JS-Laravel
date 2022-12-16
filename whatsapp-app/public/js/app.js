@@ -5533,7 +5533,7 @@ function ProfileChatUser(_ref) {
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var chatUser = function chatUser() {
     console.log("TEST");
-    dispatch(box ? (0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.close)() : (0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.show)());
+    dispatch((0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.show)());
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     onClick: chatUser,
@@ -5566,6 +5566,41 @@ function ProfileChatUser(_ref) {
   });
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProfileChatUser);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/ScreenTop/ScreenTop.js":
+/*!***************************************************!*\
+  !*** ./resources/js/Pages/ScreenTop/ScreenTop.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _img_load_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../img/load.png */ "./resources/img/load.png");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+function ScreenTop() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "min-h-[59px] p-2 bg-[#F0F2F5] sticky top-0",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "w-[40px] h-[40px] rounded-full bg-white overflow-hidden",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+        referrerPolicy: "no-referrer",
+        className: "w-full h-full",
+        src: "".concat(_img_load_png__WEBPACK_IMPORTED_MODULE_0__["default"]),
+        alt: ""
+      })
+    })
+  });
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ScreenTop);
 
 /***/ }),
 
@@ -62988,6 +63023,8 @@ var map = {
 	"./Navbar/Navbar.js": "./resources/js/Pages/Navbar/Navbar.js",
 	"./ProfileChatUser/ProfileChatUser": "./resources/js/Pages/ProfileChatUser/ProfileChatUser.js",
 	"./ProfileChatUser/ProfileChatUser.js": "./resources/js/Pages/ProfileChatUser/ProfileChatUser.js",
+	"./ScreenTop/ScreenTop": "./resources/js/Pages/ScreenTop/ScreenTop.js",
+	"./ScreenTop/ScreenTop.js": "./resources/js/Pages/ScreenTop/ScreenTop.js",
 	"./Welcome": "./resources/js/Pages/Welcome.js",
 	"./Welcome.js": "./resources/js/Pages/Welcome.js"
 };

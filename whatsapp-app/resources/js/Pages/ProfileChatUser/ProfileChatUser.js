@@ -1,5 +1,5 @@
 import React from "react";
-import {show, close} from "@/features/modalBox";
+import {show} from "@/features/modalBox";
 import { useSelector, useDispatch } from 'react-redux'
 
 function ProfileChatUser({profile, name}) {
@@ -9,7 +9,7 @@ function ProfileChatUser({profile, name}) {
 
     const chatUser = () => {
         console.log("TEST");
-        dispatch(box ? close() : show());
+        dispatch(show());
     };
 
     return (

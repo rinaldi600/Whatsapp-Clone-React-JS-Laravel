@@ -633,6 +633,9 @@ select {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+.static {
+  position: static;
+}
 .fixed {
   position: fixed;
 }
@@ -672,6 +675,9 @@ select {
 .left-1\/2 {
   left: 50%;
 }
+.bottom-0 {
+  bottom: 0px;
+}
 .z-0 {
   z-index: 0;
 }
@@ -680,6 +686,9 @@ select {
 }
 .z-40 {
   z-index: 40;
+}
+.clear-both {
+  clear: both;
 }
 .mx-auto {
   margin-left: auto;
@@ -841,6 +850,9 @@ select {
 .min-h-\[350px\] {
   min-height: 350px;
 }
+.min-h-\[100px\] {
+  min-height: 100px;
+}
 .w-5 {
   width: 1.25rem;
 }
@@ -998,6 +1010,9 @@ select {
 .overflow-hidden {
   overflow: hidden;
 }
+.overflow-visible {
+  overflow: visible;
+}
 .overflow-scroll {
   overflow: scroll;
 }
@@ -1135,6 +1150,9 @@ select {
 .bg-yellow-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(250 204 21 / var(--tw-bg-opacity));
+}
+.bg-\[url\(\'https\:\/\/user-images\.githubusercontent\.com\/15075759\/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21\.png\'\)\] {
+  background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
 }
 .fill-current {
   fill: currentColor;

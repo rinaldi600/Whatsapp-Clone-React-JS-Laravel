@@ -14,6 +14,9 @@ module.exports = {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
                 segoiUI: ['Segoe UI', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'bg-chat': "url('/img/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')",
+            }
         },
         screens: {
             'mobile': {'max': '639px'},
