@@ -1,12 +1,14 @@
 import React from "react";
 import {show} from "@/features/modalBox";
 import { useDispatch } from 'react-redux'
+import {close} from "@/features/modalBoxChat";
 
 function ProfileChatUser({profile, name}) {
 
     const dispatch = useDispatch();
 
     const chatUser = () => {
+        dispatch(close());
         dispatch(show());
     };
 

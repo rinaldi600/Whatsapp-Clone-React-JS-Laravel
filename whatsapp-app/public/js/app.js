@@ -5032,7 +5032,7 @@ function Dashboard(_ref) {
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
                   onClick: showNavbar,
-                  className: "cursor-pointer hover:shadow-xl",
+                  className: "cursor-pointer hover:bg-[#D9DBDF] hover:rounded-full hover:w-[32px] hover:h-[32px] hover:flex justify-center items-center",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("svg", {
                     viewBox: "0 0 24 24",
                     height: "24",
@@ -5459,8 +5459,11 @@ __webpack_require__.r(__webpack_exports__);
 
 function NavbarChat() {
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  var navbarChatUser = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
+    return state.modalBoxChatUser.value;
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    className: "text-[#3b4a54] font-[15px] bg-white grid justify-center items-center h-[200px] bg-white shadow-lg rounded-lg absolute top-1 right-1 sm:w-[192px] w-full",
+    className: "".concat(navbarChatUser ? 'grid' : 'hidden', " text-[#3b4a54] font-[15px] bg-white justify-center items-center h-[200px] bg-white shadow-lg rounded-lg absolute top-[20%] md:top-[10%] right-1 sm:w-[192px] w-full"),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
       children: "Info Kontak"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
@@ -5473,7 +5476,7 @@ function NavbarChat() {
       onClick: function onClick() {
         return dispatch((0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.close)());
       },
-      className: "text-left",
+      className: "text-left hover:font-bold",
       children: "Tutup Chat"
     })]
   });
@@ -5515,7 +5518,7 @@ function Navbar() {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
       children: "Setelan"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-      className: "text-left",
+      className: "text-left hover:font-bold",
       onClick: logout,
       children: "Keluar"
     })]
@@ -5539,7 +5542,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _features_modalBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/features/modalBox */ "./resources/js/features/modalBox.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _features_modalBoxChat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/features/modalBoxChat */ "./resources/js/features/modalBoxChat.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -5550,31 +5555,32 @@ function ProfileChatUser(_ref) {
     name = _ref.name;
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var chatUser = function chatUser() {
+    dispatch((0,_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_3__.close)());
     dispatch((0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.show)());
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     onClick: chatUser,
     className: "flex hover:bg-[#F5F6F6] hover:rounded-[5px] hover:p-2 gap-3 items-center cursor-pointer bg-white",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "w-[45px] h-[45px] overflow-hidden rounded-full bg-yellow-400",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
         className: "w-full h-full",
         src: profile,
         alt: ""
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "flex justify-between w-[80%] border-b-[0.5px] border-[#E9EDEF]",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "mb-1",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           className: "font-medium text-[#111b21] text-lg",
           children: name
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           className: "text-[#3b4a54] text-sm",
           children: "Oke berangkat..."
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
           className: "text-[#1FA855] text-xs font-semibold",
           children: "19.40"
         })
@@ -5990,6 +5996,50 @@ var _modalBox$actions = modalBox.actions,
 
 /***/ }),
 
+/***/ "./resources/js/features/modalBoxChat.js":
+/*!***********************************************!*\
+  !*** ./resources/js/features/modalBoxChat.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "close": () => (/* binding */ close),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "modalBox": () => (/* binding */ modalBox),
+/* harmony export */   "show": () => (/* binding */ show)
+/* harmony export */ });
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+
+var modalBox = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
+  name: 'modalBoxChatUser',
+  initialState: {
+    value: false
+  },
+  reducers: {
+    show: function show(state) {
+      // Redux Toolkit allows us to write "mutating" logic in reducers. It
+      // doesn't actually mutate the state because it uses the Immer library,
+      // which detects changes to a "draft state" and produces a brand new
+      // immutable state based off those changes
+      state.value = true;
+    },
+    close: function close(state) {
+      state.value = false;
+    }
+  }
+});
+
+// Action creators are generated for each case reducer function
+var _modalBox$actions = modalBox.actions,
+  show = _modalBox$actions.show,
+  close = _modalBox$actions.close;
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modalBox.reducer);
+
+/***/ }),
+
 /***/ "./resources/store.js":
 /*!****************************!*\
   !*** ./resources/store.js ***!
@@ -6001,13 +6051,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 /* harmony import */ var _js_features_modalBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/features/modalBox */ "./resources/js/features/modalBox.js");
+/* harmony import */ var _js_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/features/modalBoxChat */ "./resources/js/features/modalBoxChat.js");
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.configureStore)({
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.configureStore)({
   reducer: {
-    modalBox: _js_features_modalBox__WEBPACK_IMPORTED_MODULE_0__["default"]
+    modalBox: _js_features_modalBox__WEBPACK_IMPORTED_MODULE_0__["default"],
+    modalBoxChatUser: _js_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 }));
 

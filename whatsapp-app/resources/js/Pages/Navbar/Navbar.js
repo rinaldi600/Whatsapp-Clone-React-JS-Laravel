@@ -13,7 +13,7 @@ function Navbar() {
             <p>Komunitas Baru</p>
             <p>Pesan Berbintang</p>
             <p>Setelan</p>
-            <button className={"text-left"} onClick={logout}>
+            <button className={"text-left hover:font-bold"} onClick={logout}>
                 Keluar
             </button>
         </div>
