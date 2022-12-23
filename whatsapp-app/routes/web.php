@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Route::get('/auth/google',[UserController::class,'redirectGoogle'])->middleware('cors');
 Route::get('/auth/google/callback',[UserController::class,'handleGoogleCallback']);
-
+Route::get('/chats', [\App\Http\Controllers\MessageController::class, 'index'])->middleware('authUserLogin');
 
 Route::get('/user', function () {
     return Inertia::render('Dashboard',[

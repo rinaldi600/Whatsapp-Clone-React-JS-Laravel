@@ -16,7 +16,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-// import Echo from 'laravel-echo';
+import Echo from 'laravel-echo';
+import Larasocket from 'larasocket-js';
 
 // window.Pusher = require('pusher-js');
 
@@ -26,3 +27,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+
+window.Echo = new Echo({
+    broadcaster: Larasocket,
+    token: '3117|UJAY4n0FHrpZ1AdBBkU12svDDLmUb5Pts0kuZcBZ'
+});

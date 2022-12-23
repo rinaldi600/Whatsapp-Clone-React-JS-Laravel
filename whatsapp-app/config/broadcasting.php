@@ -41,6 +41,11 @@ return [
             ],
         ],
 
+        'larasocket' => [
+            'driver' => 'larasocket',
+            'token' => '3117|UJAY4n0FHrpZ1AdBBkU12svDDLmUb5Pts0kuZcBZ',
+        ],
+
         'ably' => [
             'driver' => 'ably',
             'key' => env('ABLY_KEY'),

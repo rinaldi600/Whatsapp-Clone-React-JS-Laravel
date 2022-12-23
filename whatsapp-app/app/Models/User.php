@@ -20,4 +20,8 @@ class User extends Authenticatable
      */
     protected $guarded = ['id'];
 
+    public function chats() {
+        return $this->hasMany(Chat::class,'from_this','id_user');
+    }
+
 }

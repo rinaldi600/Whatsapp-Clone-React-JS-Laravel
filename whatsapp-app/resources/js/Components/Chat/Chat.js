@@ -1,7 +1,9 @@
-import React, {lazy, Suspense, useEffect} from "react";
+import React, {lazy, Suspense, useEffect, useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import LoadingProfileImage from "../../../img/load.png";
 import {show, close} from '../../features/modalBoxChat';
+import axios from "axios";
+import {Inertia} from "@inertiajs/inertia";
 
 const NavbarChat = lazy(() => import('../../Pages/NavbarChat/NavbarChat'));
 
@@ -9,27 +11,31 @@ function Chat() {
 
     const chat = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur deleniti ducimus eum fuga iste perferendis quisquam repellat sequi tempore. Totam?';
 
-    const chat2 = [
-        {
-            'messageFrom1' : {
-                'text' : 'Oke',
-            },
-            'messageMy1' : {
-                'text' : 'Jam Berapa',
-            },
-            'messageFrom2' : {
-                'text' : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur at cupiditate, et facere incidunt, itaque iure maxime molestiae nemo numquam omnis optio perspiciatis porro quaerat qui rem repellat vel, veniam veritatis voluptas? Aperiam culpa cumque cupiditate delectus dignissimos dolor dolore eaque earum, enim nihil, obcaecati odio ratione sed sequi vitae!'
-            }
-        }
-    ];
-
     const box = useSelector(state => state.modalBox.value);
     const navbarChatUser = useSelector(state => state.modalBoxChatUser.value);
     const dispatch = useDispatch();
+    const [getMessage, setValueMessage] = useState('');
 
     useEffect(() => {
-        console.log(chat.length);
+
+        window.Echo.private('chat')
+            .listen('MessageSentEventddd', (e) => {
+                axios.get('/chats')
+                    .then((e) => {
+                        console.log(e);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            });
     });
+
+    const sendMessage = () => {
+        // Inertia.post('/',[
+        //
+        // ])
+        console.log(getMessage);
+    };
 
     return (
         <div className={`${box ? 'block' : 'hidden'} scrollbar-hide overflow-y-scroll w-full h-full bg-white`}>
@@ -76,13 +82,15 @@ function Chat() {
                 </div>
                 <div className={"w-[892.925px] flex h-full rounded-lg overflow-hidden"}>
                     <div className={"w-[832.925px] bg-transparent flex items-center h-full"}>
-                        <input type="text" className={"w-full rounded-lg font-normal h-full bg-white border-transparent focus:border-transparent focus:ring-0"} placeholder={"Ketik Pesan"}/>
+                        <input onChange={(e) => setValueMessage(e.target.value)} type="text" className={"w-full rounded-lg font-normal h-full bg-white border-transparent focus:border-transparent focus:ring-0"} placeholder={"Ketik Pesan"}/>
                     </div>
                     <div className={"w-[37px] flex items-center justify-center"}>
-                        <span data-testid="send" data-icon="send" className="text-[#54656F] cursor-pointer"><svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" className="" version="1.1" x="0px" y="0px" enable-background="new 0 0 24 24">
-                            <path fill="currentColor" d="M1.101,21.757L23.8,12.028L1.101,2.3l0.011,7.912l13.623,1.816L1.112,13.845 L1.101,21.757z"></path>
+                        <button onClick={sendMessage}>
+                            <span data-testid="send" data-icon="send" className="text-[#54656F] cursor-pointer"><svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" className="" version="1.1" x="0px" y="0px" enable-background="new 0 0 24 24">
+                                <path fill="currentColor" d="M1.101,21.757L23.8,12.028L1.101,2.3l0.011,7.912l13.623,1.816L1.112,13.845 L1.101,21.757z"></path>
                             </svg>
                         </span>
+                        </button>
                     </div>
                 </div>
             </div>
