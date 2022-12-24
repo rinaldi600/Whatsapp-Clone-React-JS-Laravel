@@ -14,11 +14,6 @@ export default function Dashboard({user}) {
     const [sticky, setSticky] = useState(false);
     const box = useSelector(state => state.modalBox.value);
 
-    useEffect(() => {
-       console.log(user)
-    });
-
-
     const showNavbar = () => {
         if (!navbarBoxStatus) {
             setNavbarStatus(true);

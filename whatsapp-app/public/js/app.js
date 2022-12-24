@@ -4933,9 +4933,6 @@ function Dashboard(_ref) {
   var box = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
     return state.modalBox.value;
   });
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log(user);
-  });
   var showNavbar = function showNavbar() {
     if (!navbarBoxStatus) {
       setNavbarStatus(true);
@@ -5943,9 +5940,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
  * allows your team to easily build robust real-time web applications.
  */
 
-
-
-
 // window.Pusher = require('pusher-js');
 
 // window.Echo = new Echo({
@@ -5955,9 +5949,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: true
 // });
 
+
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: larasocket_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-  token: '3117|UJAY4n0FHrpZ1AdBBkU12svDDLmUb5Pts0kuZcBZ'
+  token: '3117|UJAY4n0FHrpZ1AdBBkU12svDDLmUb5Pts0kuZcBZ',
+  // required
+  debug: true / false
 });
 
 /***/ }),

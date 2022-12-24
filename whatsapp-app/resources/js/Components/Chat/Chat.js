@@ -2,39 +2,31 @@ import React, {lazy, Suspense, useEffect, useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import LoadingProfileImage from "../../../img/load.png";
 import {show, close} from '../../features/modalBoxChat';
-import axios from "axios";
 import {Inertia} from "@inertiajs/inertia";
+import Echo from 'laravel-echo';
+import Larasocket from 'larasocket-js';
 
 const NavbarChat = lazy(() => import('../../Pages/NavbarChat/NavbarChat'));
 
-function Chat() {
-
-    const chat = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur deleniti ducimus eum fuga iste perferendis quisquam repellat sequi tempore. Totam?';
+function Chat(props) {
 
     const box = useSelector(state => state.modalBox.value);
     const navbarChatUser = useSelector(state => state.modalBoxChatUser.value);
     const dispatch = useDispatch();
+    const [getChat, setChat] = useState([]);
     const [getMessage, setValueMessage] = useState('');
 
     useEffect(() => {
-
         window.Echo.private('chat')
-            .listen('MessageSentEventddd', (e) => {
-                axios.get('/chats')
-                    .then((e) => {
-                        console.log(e);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
+            .listen('MessageSentEvent', (e) => {
+                console.log(e.user);
             });
     });
 
     const sendMessage = () => {
-        // Inertia.post('/',[
-        //
-        // ])
-        console.log(getMessage);
+        Inertia.post('/post/chat',{
+            'message' : getMessage
+        });
     };
 
     return (
@@ -67,7 +59,9 @@ function Chat() {
                             <p className={"break-words"}>Oke</p>
                         </div>
                         <div className={"p-1 mt-1 w-fit grid rounded-lg bg-white"}>
-                            <p className={"break-words"}>{chat}</p>
+                            <p className={"break-words"}>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, amet atque dignissimos dolore doloribus esse ipsum magni minima minus nobis officiis quas saepe sit soluta?
+                            </p>
                         </div>
                     </div>
                 </div>

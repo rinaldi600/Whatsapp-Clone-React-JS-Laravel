@@ -6,6 +6,7 @@ use App\Events\MessageSentEvent;
 use Illuminate\Http\Request;
 use App\Models\Chat;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class MessageController extends Controller
 {
@@ -23,16 +24,22 @@ class MessageController extends Controller
     {
         $user = Auth::user();
 
-        $message = $user->chats()->create([
-            'message' => $request->input('message')
-        ]);
+        $data = [
+            'id_chat' => 'CHAT - ' . uniqid(),
+            'from_this' => Auth::user()['id_user'],
+            'to_this' => 'USER - 202212051442041670226124.7816',
+            'message' => $request->input('message'),
+        ];
+        $message = Chat::create($data);
 
         // send event to listeners
         broadcast(new MessageSentEvent($message, $user))->toOthers();
 
-        return [
-            'message' => $message,
-            'user' => $user,
-        ];
+//        return response()->json([
+//            'work' => 'SUCCESS',
+//        ]);
+        return Redirect::back()->with([
+            'success' => 'WORK'
+        ]);
     }
 }
