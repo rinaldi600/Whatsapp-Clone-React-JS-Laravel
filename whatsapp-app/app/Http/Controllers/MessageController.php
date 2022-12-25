@@ -23,21 +23,21 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
+        $idChat = 'CHAT - ' . uniqid();
 
         $data = [
-            'id_chat' => 'CHAT - ' . uniqid(),
+            'id_chat' => $idChat,
             'from_this' => Auth::user()['id_user'],
             'to_this' => 'USER - 202212051442041670226124.7816',
             'message' => $request->input('message'),
         ];
         $message = Chat::create($data);
 
-        // send event to listeners
-        broadcast(new MessageSentEvent($message, $user))->toOthers();
+        $detailChat = Chat::with('users')->where('id_chat', $idChat)->first();
 
-//        return response()->json([
-//            'work' => 'SUCCESS',
-//        ]);
+        // send event to listeners
+        broadcast(new MessageSentEvent($detailChat, $user))->toOthers();
+
         return Redirect::back()->with([
             'success' => 'WORK'
         ]);

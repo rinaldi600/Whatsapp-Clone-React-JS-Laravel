@@ -26,11 +26,7 @@ Route::get('/auth/google/callback',[UserController::class,'handleGoogleCallback'
 Route::get('/chats', [\App\Http\Controllers\MessageController::class, 'index'])->middleware('authUserLogin');
 Route::post('/post/chat', [\App\Http\Controllers\MessageController::class, 'store'])->middleware('authUserLogin');
 
-Route::get('/user', function () {
-    return Inertia::render('Dashboard',[
-        'user' => \Illuminate\Support\Facades\Auth::user()
-    ]);
-})->middleware('authUserLogin');
+Route::get('/user', [UserController::class, 'index'])->middleware('authUserLogin');
 
 Route::post('/logout',[UserController::class,'logout']);
 

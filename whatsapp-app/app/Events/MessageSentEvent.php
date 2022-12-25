@@ -43,4 +43,9 @@ class MessageSentEvent implements ShouldBroadcast
     {
         return new PrivateChannel('chat');
     }
+
+    public function broadcastWith()
+    {
+        return $this->message->toArray();
+    }
 }

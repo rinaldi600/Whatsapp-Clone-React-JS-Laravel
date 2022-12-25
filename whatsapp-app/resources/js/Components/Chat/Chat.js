@@ -3,26 +3,35 @@ import { useSelector, useDispatch } from 'react-redux';
 import LoadingProfileImage from "../../../img/load.png";
 import {show, close} from '../../features/modalBoxChat';
 import {Inertia} from "@inertiajs/inertia";
-import Echo from 'laravel-echo';
-import Larasocket from 'larasocket-js';
+import axios from "axios";
 
 const NavbarChat = lazy(() => import('../../Pages/NavbarChat/NavbarChat'));
 
-function Chat(props) {
+function Chat() {
 
     const box = useSelector(state => state.modalBox.value);
     const navbarChatUser = useSelector(state => state.modalBoxChatUser.value);
+    const userSlice = useSelector(state => state.userSlice.value);
     const dispatch = useDispatch();
     const [getChat, setChat] = useState([]);
     const [getMessage, setValueMessage] = useState('');
 
     useEffect(() => {
-        window.Echo.private('chat')
-            .listen('MessageSentEvent', (e) => {
-                console.log(e.user);
+        axios.get('/chats')
+            .then((success) => {
+               setChat(success.data);
+            })
+            .catch((error) => {
+                console.log(error);
             });
-    });
+        Echo.private('chat')
+            .listen('MessageSentEvent', (e) => {
+                console.log(e);
+            });
+        console.log(JSON.parse(sessionStorage.getItem('userDetail')));
+    },[]);
 
+    console.log(getChat);
     const sendMessage = () => {
         Inertia.post('/post/chat',{
             'message' : getMessage
@@ -35,9 +44,9 @@ function Chat(props) {
                 <div className={"flex items-center gap-2"}>
                     <div className={"w-[40px] h-[40px] rounded-full bg-white overflow-hidden"}>
                         <img referrerPolicy="no-referrer" className={"w-full h-full"}
-                             src={`${LoadingProfileImage}`} alt=""/>
+                             src={`${userSlice.photo_profile}`} alt=""/>
                     </div>
-                    <p>Rinaldi</p>
+                    <p>{userSlice.name}</p>
                 </div>
                 <div>
                     <div onClick={() => dispatch(navbarChatUser ? close() : show())} className={`cursor-pointer hover:bg-[#D9DBDF] hover:rounded-full hover:w-[32px] hover:h-[32px] hover:flex justify-center items-center`}>

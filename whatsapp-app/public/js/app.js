@@ -4917,7 +4917,8 @@ var Chat = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () 
 });
 function Dashboard(_ref) {
   var _user$photo_profile;
-  var user = _ref.user;
+  var user = _ref.user,
+    listUser = _ref.listUser;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     navbarBoxStatus = _useState2[0],
@@ -4932,6 +4933,10 @@ function Dashboard(_ref) {
     setSticky = _useState6[1];
   var box = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
     return state.modalBox.value;
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log(listUser);
+    sessionStorage.setItem("userDetail", JSON.stringify(user));
   });
   var showNavbar = function showNavbar() {
     if (!navbarBoxStatus) {
@@ -5105,18 +5110,18 @@ function Dashboard(_ref) {
                 })]
               })
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             onScroll: function onScroll(e) {
               return getValue(e);
             },
             className: "overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              profile: user.photo_profile,
-              name: "Rinaldi"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-              profile: user.photo_profile,
-              name: "Doni"
-            })]
+            children: listUser.map(function (user) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                profile: user.photo_profile,
+                name: user.name,
+                idUser: user.id_user
+              });
+            })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "w-[70%] relative flex justify-center items-center mobile:w-full bg-[#F0F2F5] mobile:h-[50%] sm:min-h-full",
@@ -5540,7 +5545,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _features_modalBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/features/modalBox */ "./resources/js/features/modalBox.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _features_modalBoxChat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/features/modalBoxChat */ "./resources/js/features/modalBoxChat.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _features_getDetailUser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/features/getDetailUser */ "./resources/js/features/getDetailUser.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -5549,35 +5556,48 @@ __webpack_require__.r(__webpack_exports__);
 
 function ProfileChatUser(_ref) {
   var profile = _ref.profile,
-    name = _ref.name;
+    name = _ref.name,
+    idUser = _ref.idUser;
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  var userSlice = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
+    return state.userSlice.value;
+  });
   var chatUser = function chatUser() {
+    dispatch((0,_features_getDetailUser__WEBPACK_IMPORTED_MODULE_4__.getDetail)({
+      idUser: idUser,
+      name: name,
+      profile: profile
+    }));
     dispatch((0,_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_3__.close)());
     dispatch((0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.show)());
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log(userSlice);
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     onClick: chatUser,
     className: "flex hover:bg-[#F5F6F6] hover:rounded-[5px] hover:p-2 gap-3 items-center cursor-pointer bg-white",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "w-[45px] h-[45px] overflow-hidden rounded-full bg-yellow-400",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+        referrerpolicy: "no-referrer",
         className: "w-full h-full",
         src: profile,
         alt: ""
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "flex justify-between w-[80%] border-b-[0.5px] border-[#E9EDEF]",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "mb-1",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           className: "font-medium text-[#111b21] text-lg",
           children: name
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           className: "text-[#3b4a54] text-sm",
           children: "Oke berangkat..."
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
           className: "text-[#1FA855] text-xs font-semibold",
           children: "19.40"
         })
@@ -5959,6 +5979,53 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 /***/ }),
 
+/***/ "./resources/js/features/getDetailUser.js":
+/*!************************************************!*\
+  !*** ./resources/js/features/getDetailUser.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "getDetail": () => (/* binding */ getDetail),
+/* harmony export */   "userDetailSlice": () => (/* binding */ userDetailSlice)
+/* harmony export */ });
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var userDetailSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
+  name: 'userSlice',
+  initialState: {
+    value: {
+      idUser: '',
+      name: '',
+      photo_profile: ''
+    }
+  },
+  reducers: {
+    getDetail: function getDetail(state, action) {
+      return _objectSpread(_objectSpread({}, state), {}, {
+        value: {
+          idUser: action.payload.idUser,
+          name: action.payload.name,
+          photo_profile: action.payload.profile
+        }
+      });
+    }
+  }
+});
+
+// Action creators are generated for each case reducer function
+var getDetail = userDetailSlice.actions.getDetail;
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (userDetailSlice.reducer);
+
+/***/ }),
+
 /***/ "./resources/js/features/modalBox.js":
 /*!*******************************************!*\
   !*** ./resources/js/features/modalBox.js ***!
@@ -6058,16 +6125,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 /* harmony import */ var _js_features_modalBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/features/modalBox */ "./resources/js/features/modalBox.js");
 /* harmony import */ var _js_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/features/modalBoxChat */ "./resources/js/features/modalBoxChat.js");
+/* harmony import */ var _js_features_getDetailUser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/features/getDetailUser */ "./resources/js/features/getDetailUser.js");
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.configureStore)({
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_3__.configureStore)({
   reducer: {
     modalBox: _js_features_modalBox__WEBPACK_IMPORTED_MODULE_0__["default"],
-    modalBoxChatUser: _js_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_1__["default"]
+    modalBoxChatUser: _js_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_1__["default"],
+    userSlice: _js_features_getDetailUser__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 }));
 

@@ -7,12 +7,17 @@ import ProfileChatUser from "@/Pages/ProfileChatUser/ProfileChatUser";
 const Navbar = lazy(() => import('../Pages/Navbar/Navbar'));
 const Chat = lazy(() => import('../Components/Chat/Chat'));
 
-export default function Dashboard({user}) {
+export default function Dashboard({user, listUser}) {
 
     const [navbarBoxStatus, setNavbarStatus] = useState(false);
     const [icon, setIconInput] = useState(false);
     const [sticky, setSticky] = useState(false);
     const box = useSelector(state => state.modalBox.value);
+
+    useEffect(() => {
+        console.log(listUser);
+        sessionStorage.setItem("userDetail", JSON.stringify(user));
+    });
 
     const showNavbar = () => {
         if (!navbarBoxStatus) {
@@ -101,10 +106,11 @@ export default function Dashboard({user}) {
                         </div>
 
                         <div onScroll={(e) => getValue(e)} className={"overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2"}>
-
-                            <ProfileChatUser profile={user.photo_profile} name={"Rinaldi"}/>
-                            <ProfileChatUser profile={user.photo_profile} name={"Doni"}/>
-
+                            {
+                                listUser.map((user) => (
+                                    <ProfileChatUser profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
+                                ))
+                            }
                         </div>
 
                     </div>

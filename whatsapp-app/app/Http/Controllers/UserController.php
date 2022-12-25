@@ -7,10 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
-use Laravel\Socialite\Two\InvalidStateException;
 
 class UserController extends Controller
 {
+
+    public function index() {
+        return Inertia::render('Dashboard',[
+            'user' => \Illuminate\Support\Facades\Auth::user(),
+            'listUser' => User::where('id_user', '!=' ,Auth::user()['id_user'])->get(),
+        ]);
+    }
 
     public function redirectGoogle() {
         return Socialite::driver('google')->redirect();
