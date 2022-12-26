@@ -4935,7 +4935,6 @@ function Dashboard(_ref) {
     return state.modalBox.value;
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log(listUser);
     sessionStorage.setItem("userDetail", JSON.stringify(user));
   });
   var showNavbar = function showNavbar() {
@@ -5546,7 +5545,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _features_modalBoxChat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/features/modalBoxChat */ "./resources/js/features/modalBoxChat.js");
 /* harmony import */ var _features_getDetailUser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/features/getDetailUser */ "./resources/js/features/getDetailUser.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _features_getChats__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/features/getChats */ "./resources/js/features/getChats.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
@@ -5559,10 +5563,15 @@ function ProfileChatUser(_ref) {
     name = _ref.name,
     idUser = _ref.idUser;
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
-  var userSlice = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
-    return state.userSlice.value;
-  });
+  var userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
   var chatUser = function chatUser() {
+    if (idUser !== '') {
+      axios__WEBPACK_IMPORTED_MODULE_6___default().get("/chats/".concat(userCurrent === null || userCurrent === void 0 ? void 0 : userCurrent.id_user, "/").concat(idUser)).then(function (success) {
+        dispatch((0,_features_getChats__WEBPACK_IMPORTED_MODULE_5__.chatsFetch)(success.data));
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
     dispatch((0,_features_getDetailUser__WEBPACK_IMPORTED_MODULE_4__.getDetail)({
       idUser: idUser,
       name: name,
@@ -5571,33 +5580,30 @@ function ProfileChatUser(_ref) {
     dispatch((0,_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_3__.close)());
     dispatch((0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.show)());
   };
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log(userSlice);
-  });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     onClick: chatUser,
     className: "flex hover:bg-[#F5F6F6] hover:rounded-[5px] hover:p-2 gap-3 items-center cursor-pointer bg-white",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "w-[45px] h-[45px] overflow-hidden rounded-full bg-yellow-400",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
         referrerpolicy: "no-referrer",
         className: "w-full h-full",
         src: profile,
         alt: ""
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "flex justify-between w-[80%] border-b-[0.5px] border-[#E9EDEF]",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
         className: "mb-1",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
           className: "font-medium text-[#111b21] text-lg",
           children: name
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
           className: "text-[#3b4a54] text-sm",
           children: "Oke berangkat..."
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
           className: "text-[#1FA855] text-xs font-semibold",
           children: "19.40"
         })
@@ -5979,6 +5985,40 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 /***/ }),
 
+/***/ "./resources/js/features/getChats.js":
+/*!*******************************************!*\
+  !*** ./resources/js/features/getChats.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "chatSlice": () => (/* binding */ chatSlice),
+/* harmony export */   "chatsFetch": () => (/* binding */ chatsFetch),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+
+var chatSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
+  name: 'chats',
+  initialState: {
+    value: []
+  },
+  reducers: {
+    chatsFetch: function chatsFetch(state, action) {
+      state.value = action.payload;
+    }
+  }
+});
+
+// Action creators are generated for each case reducer function
+var chatsFetch = chatSlice.actions.chatsFetch;
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (chatSlice.reducer);
+
+/***/ }),
+
 /***/ "./resources/js/features/getDetailUser.js":
 /*!************************************************!*\
   !*** ./resources/js/features/getDetailUser.js ***!
@@ -6125,19 +6165,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 /* harmony import */ var _js_features_modalBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/features/modalBox */ "./resources/js/features/modalBox.js");
 /* harmony import */ var _js_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/features/modalBoxChat */ "./resources/js/features/modalBoxChat.js");
 /* harmony import */ var _js_features_getDetailUser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/features/getDetailUser */ "./resources/js/features/getDetailUser.js");
+/* harmony import */ var _js_features_getChats__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/features/getChats */ "./resources/js/features/getChats.js");
 
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_3__.configureStore)({
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_4__.configureStore)({
   reducer: {
     modalBox: _js_features_modalBox__WEBPACK_IMPORTED_MODULE_0__["default"],
     modalBoxChatUser: _js_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_1__["default"],
-    userSlice: _js_features_getDetailUser__WEBPACK_IMPORTED_MODULE_2__["default"]
+    userSlice: _js_features_getDetailUser__WEBPACK_IMPORTED_MODULE_2__["default"],
+    chatSlice: _js_features_getChats__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 }));
 

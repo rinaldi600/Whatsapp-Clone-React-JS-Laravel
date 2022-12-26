@@ -15,9 +15,14 @@ class MessageController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index($from_this, $to_this = null)
     {
-        return Chat::with('users')->get();
+        if ($to_this === null) {
+            return response()->json([
+                'response' => 'Waiting Open Chat Room'
+            ]);
+        }
+        return Chat::with('users')->where('from_this', $from_this)->where('to_this', $to_this)->get();
     }
 
     public function store(Request $request)

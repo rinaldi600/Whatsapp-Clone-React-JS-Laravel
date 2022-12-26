@@ -1,37 +1,28 @@
 import React, {lazy, Suspense, useEffect, useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import LoadingProfileImage from "../../../img/load.png";
 import {show, close} from '../../features/modalBoxChat';
 import {Inertia} from "@inertiajs/inertia";
-import axios from "axios";
 
 const NavbarChat = lazy(() => import('../../Pages/NavbarChat/NavbarChat'));
 
 function Chat() {
 
     const box = useSelector(state => state.modalBox.value);
+    const chatSlice = useSelector(state => state.chatSlice.value);
+    const userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
     const navbarChatUser = useSelector(state => state.modalBoxChatUser.value);
     const userSlice = useSelector(state => state.userSlice.value);
     const dispatch = useDispatch();
-    const [getChat, setChat] = useState([]);
     const [getMessage, setValueMessage] = useState('');
 
     useEffect(() => {
-        axios.get('/chats')
-            .then((success) => {
-               setChat(success.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
         Echo.private('chat')
             .listen('MessageSentEvent', (e) => {
                 console.log(e);
             });
-        console.log(JSON.parse(sessionStorage.getItem('userDetail')));
-    },[]);
+        console.log(chatSlice);
+    });
 
-    console.log(getChat);
     const sendMessage = () => {
         Inertia.post('/post/chat',{
             'message' : getMessage

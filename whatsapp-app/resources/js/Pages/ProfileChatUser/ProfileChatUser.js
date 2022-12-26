@@ -1,15 +1,26 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {show} from "@/features/modalBox";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {close} from "@/features/modalBoxChat";
 import {getDetail} from '@/features/getDetailUser';
+import {chatsFetch} from '@/features/getChats';
+import axios from "axios";
 
 function ProfileChatUser({profile, name, idUser}) {
 
     const dispatch = useDispatch();
-    const userSlice = useSelector(state => state.userSlice.value);
+    const userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
 
     const chatUser = () => {
+        if (idUser !== '') {
+            axios.get(`/chats/${userCurrent?.id_user}/${idUser}`)
+                .then((success) => {
+                    dispatch(chatsFetch(success.data));
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
         dispatch(getDetail({
             idUser,
             name,
@@ -19,9 +30,6 @@ function ProfileChatUser({profile, name, idUser}) {
         dispatch(show());
     };
 
-    useEffect(() => {
-       console.log(userSlice);
-    });
 
     return (
         <div onClick={chatUser} className={"flex hover:bg-[#F5F6F6] hover:rounded-[5px] hover:p-2 gap-3 items-center cursor-pointer bg-white"}>

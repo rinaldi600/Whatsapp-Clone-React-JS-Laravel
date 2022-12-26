@@ -15,7 +15,6 @@ export default function Dashboard({user, listUser}) {
     const box = useSelector(state => state.modalBox.value);
 
     useEffect(() => {
-        console.log(listUser);
         sessionStorage.setItem("userDetail", JSON.stringify(user));
     });
 
