@@ -16,15 +16,21 @@ function Chat() {
     const [getMessage, setValueMessage] = useState('');
 
     useEffect(() => {
-        Echo.private('chat')
-            .listen('MessageSentEvent', (e) => {
+        // Echo.private('chat')
+        //     .listen('MessageSentEvent', (e) => {
+        //         console.log(e);
+        //     });
+        Echo.private(`users.${userSlice?.id}`)
+            .listen('MessagePrivateEvent', (e) => {
                 console.log(e);
             });
-        console.log(chatSlice);
+
+        // console.log(userSlice);
     });
 
     const sendMessage = () => {
         Inertia.post('/post/chat',{
+            'to_this' : userSlice?.idUser,
             'message' : getMessage
         });
     };

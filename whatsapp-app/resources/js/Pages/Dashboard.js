@@ -107,7 +107,7 @@ export default function Dashboard({user, listUser}) {
                         <div onScroll={(e) => getValue(e)} className={"overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2"}>
                             {
                                 listUser.map((user) => (
-                                    <ProfileChatUser profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
+                                    <ProfileChatUser id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
                                 ))
                             }
                         </div>

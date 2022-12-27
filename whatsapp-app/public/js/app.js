@@ -5116,6 +5116,7 @@ function Dashboard(_ref) {
             className: "overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2",
             children: listUser.map(function (user) {
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                id: user.id,
                 profile: user.photo_profile,
                 name: user.name,
                 idUser: user.id_user
@@ -5561,7 +5562,8 @@ __webpack_require__.r(__webpack_exports__);
 function ProfileChatUser(_ref) {
   var profile = _ref.profile,
     name = _ref.name,
-    idUser = _ref.idUser;
+    idUser = _ref.idUser,
+    id = _ref.id;
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
   var chatUser = function chatUser() {
@@ -5573,6 +5575,7 @@ function ProfileChatUser(_ref) {
       });
     }
     dispatch((0,_features_getDetailUser__WEBPACK_IMPORTED_MODULE_4__.getDetail)({
+      id: id,
       idUser: idUser,
       name: name,
       profile: profile
@@ -6050,6 +6053,7 @@ var userDetailSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSli
     getDetail: function getDetail(state, action) {
       return _objectSpread(_objectSpread({}, state), {}, {
         value: {
+          id: action.payload.id,
           idUser: action.payload.idUser,
           name: action.payload.name,
           photo_profile: action.payload.profile

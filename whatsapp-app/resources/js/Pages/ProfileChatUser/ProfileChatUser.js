@@ -6,7 +6,7 @@ import {getDetail} from '@/features/getDetailUser';
 import {chatsFetch} from '@/features/getChats';
 import axios from "axios";
 
-function ProfileChatUser({profile, name, idUser}) {
+function ProfileChatUser({profile, name, idUser, id}) {
 
     const dispatch = useDispatch();
     const userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
@@ -22,6 +22,7 @@ function ProfileChatUser({profile, name, idUser}) {
                 });
         }
         dispatch(getDetail({
+            id,
             idUser,
             name,
             profile

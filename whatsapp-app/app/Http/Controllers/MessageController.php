@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessagePrivateEvent;
 use App\Events\MessageSentEvent;
 use Illuminate\Http\Request;
 use App\Models\Chat;
@@ -33,15 +34,17 @@ class MessageController extends Controller
         $data = [
             'id_chat' => $idChat,
             'from_this' => Auth::user()['id_user'],
-            'to_this' => 'USER - 202212051442041670226124.7816',
+            'to_this' => $request->input('to_this'),
             'message' => $request->input('message'),
         ];
-        $message = Chat::create($data);
+
+        Chat::create($data);
 
         $detailChat = Chat::with('users')->where('id_chat', $idChat)->first();
 
         // send event to listeners
-        broadcast(new MessageSentEvent($detailChat, $user))->toOthers();
+//        broadcast(new MessageSentEvent($detailChat, $user))->toOthers();
+        broadcast(new MessagePrivateEvent($user));
 
         return Redirect::back()->with([
             'success' => 'WORK'

@@ -51,13 +51,20 @@ function Chat() {
     getMessage = _useState2[0],
     setValueMessage = _useState2[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    Echo["private"]('chat').listen('MessageSentEvent', function (e) {
+    // Echo.private('chat')
+    //     .listen('MessageSentEvent', (e) => {
+    //         console.log(e);
+    //     });
+    Echo["private"]("users.".concat(userSlice === null || userSlice === void 0 ? void 0 : userSlice.id)).listen('MessagePrivateEvent', function (e) {
       console.log(e);
     });
-    console.log(chatSlice);
+
+    // console.log(userSlice);
   });
+
   var sendMessage = function sendMessage() {
     _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.post('/post/chat', {
+      'to_this': userSlice === null || userSlice === void 0 ? void 0 : userSlice.idUser,
       'message': getMessage
     });
   };

@@ -14,6 +14,7 @@ export const userDetailSlice = createSlice({
             return {
                 ...state,
                 value : {
+                    id : action.payload.id,
                     idUser: action.payload.idUser,
                     name : action.payload.name,
                     photo_profile : action.payload.profile,
