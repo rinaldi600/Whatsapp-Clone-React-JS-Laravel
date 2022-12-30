@@ -11,6 +11,7 @@ function Chat() {
     const chatSlice = useSelector(state => state.chatSlice.value);
     const userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
     const navbarChatUser = useSelector(state => state.modalBoxChatUser.value);
+    const [currentRealTimeChat, setRealTimeChat] = useState([]);
     const userSlice = useSelector(state => state.userSlice.value);
     const dispatch = useDispatch();
     const [getMessage, setValueMessage] = useState('');
@@ -24,7 +25,6 @@ function Chat() {
             .listen('MessagePrivateEvent', (e) => {
                 console.log(e);
             });
-
         // console.log(userSlice);
     });
 
@@ -58,17 +58,13 @@ function Chat() {
                 </Suspense>
                 <div className={"h-[638px] text-sm text-[#111b21] scrollbar-hide overflow-y-scroll"}>
                     <div className={"w-[90%] h-full mx-auto"}>
-                        <div className={"p-1 mt-1 w-fit rounded-lg bg-white"}>
-                            <p className={"break-words"}>Oke</p>
-                        </div>
-                        <div className={"p-1 mt-1 w-fit rounded-lg bg-[#D9FDD3]"}>
-                            <p className={"break-words"}>Oke</p>
-                        </div>
-                        <div className={"p-1 mt-1 w-fit grid rounded-lg bg-white"}>
-                            <p className={"break-words"}>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, amet atque dignissimos dolore doloribus esse ipsum magni minima minus nobis officiis quas saepe sit soluta?
-                            </p>
-                        </div>
+                        {
+                            chatSlice.map((chat) => (
+                                <div className={`p-1 mt-1 w-fit rounded-lg ${chat.from_this === userCurrent.id_user ? 'bg-[#D9FDD3]' : 'bg-white' }`}>
+                                    <p className={"break-words"}>{chat.message}</p>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
             </div>

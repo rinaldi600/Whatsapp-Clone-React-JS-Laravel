@@ -18,6 +18,6 @@ class Chat extends Model
     protected $guarded = ['id'];
 
     public function users() {
-        return $this->belongsTo(User::class,'from_this','id_user');
+        return $this->belongsTo(User::class,'to_this','id_user');
     }
 }

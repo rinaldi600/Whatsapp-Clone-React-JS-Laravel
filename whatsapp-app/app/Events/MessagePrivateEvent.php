@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Chat;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -27,12 +28,13 @@ class MessagePrivateEvent implements ShouldBroadcast
      * Create a new event instance.
      *
      * @param  \App\Models\User  $user
+     * @param  \App\Models\Chat $chat
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $user, Chat $chat)
     {
         $this->user = $user;
-        $this->chat = 'WORK';
+        $this->chat = $chat;
     }
 
     /**
@@ -50,8 +52,11 @@ class MessagePrivateEvent implements ShouldBroadcast
      *
      * @return array
      */
-//    public function broadcastWith()
-//    {
-//        return ['id' => $this->user->id];
-//    }
+    public function broadcastWith()
+    {
+        return [
+            'id' => $this->user,
+            'message' => $this->chat
+        ];
+    }
 }

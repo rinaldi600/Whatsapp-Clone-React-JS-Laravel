@@ -23,7 +23,13 @@ class MessageController extends Controller
                 'response' => 'Waiting Open Chat Room'
             ]);
         }
-        return Chat::with('users')->where('from_this', $from_this)->where('to_this', $to_this)->get();
+
+        return Chat::with('users')
+            ->where('from_this', $from_this)->where('to_this', $to_this)
+            ->orWhere(function ($query) use ($from_this, $to_this) {
+                $query->where('from_this', $to_this)->where('to_this', $from_this);
+            })
+            ->orderBy('created_at', 'asc')->get();
     }
 
     public function store(Request $request)
@@ -44,7 +50,7 @@ class MessageController extends Controller
 
         // send event to listeners
 //        broadcast(new MessageSentEvent($detailChat, $user))->toOthers();
-        broadcast(new MessagePrivateEvent($user));
+        broadcast(new MessagePrivateEvent($user, $detailChat));
 
         return Redirect::back()->with([
             'success' => 'WORK'
