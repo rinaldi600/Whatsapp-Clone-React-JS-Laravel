@@ -55,16 +55,13 @@ function Chat() {
     getMessage = _useState4[0],
     setValueMessage = _useState4[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    // Echo.private('chat')
-    //     .listen('MessageSentEvent', (e) => {
-    //         console.log(e);
-    //     });
+    Echo["private"]("App.Models.User.".concat(userSlice === null || userSlice === void 0 ? void 0 : userSlice.id)).notification(function (notification) {
+      console.log(notification);
+    });
     Echo["private"]("users.".concat(userSlice === null || userSlice === void 0 ? void 0 : userSlice.id)).listen('MessagePrivateEvent', function (e) {
       console.log(e);
     });
-    // console.log(userSlice);
   });
-
   var sendMessage = function sendMessage() {
     _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.post('/post/chat', {
       'to_this': userSlice === null || userSlice === void 0 ? void 0 : userSlice.idUser,

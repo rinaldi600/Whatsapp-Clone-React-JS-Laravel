@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Events\MessagePrivateEvent;
 use App\Events\MessageSentEvent;
+use App\Models\User;
+use App\Notifications\ChatNotification;
+use App\Notifications\RealTimeNotification;
 use Illuminate\Http\Request;
 use App\Models\Chat;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -35,6 +39,8 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
+        $userSendNotification = User::first();
+
         $idChat = 'CHAT - ' . uniqid();
 
         $data = [
@@ -50,8 +56,10 @@ class MessageController extends Controller
 
         // send event to listeners
 //        broadcast(new MessageSentEvent($detailChat, $user))->toOthers();
-        broadcast(new MessagePrivateEvent($user, $detailChat));
 
+
+        broadcast(new MessagePrivateEvent($user, $detailChat));
+        $userSendNotification->notify(new RealTimeNotification('Test 1 2 3'));
         return Redirect::back()->with([
             'success' => 'WORK'
         ]);

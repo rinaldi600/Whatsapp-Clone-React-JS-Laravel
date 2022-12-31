@@ -17,15 +17,14 @@ function Chat() {
     const [getMessage, setValueMessage] = useState('');
 
     useEffect(() => {
-        // Echo.private('chat')
-        //     .listen('MessageSentEvent', (e) => {
-        //         console.log(e);
-        //     });
+        Echo.private(`App.Models.User.${userSlice?.id}`)
+            .notification((notification) => {
+                console.log(notification);
+            });
         Echo.private(`users.${userSlice?.id}`)
             .listen('MessagePrivateEvent', (e) => {
                 console.log(e);
             });
-        // console.log(userSlice);
     });
 
     const sendMessage = () => {
