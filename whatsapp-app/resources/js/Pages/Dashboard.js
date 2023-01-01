@@ -7,7 +7,7 @@ import ProfileChatUser from "@/Pages/ProfileChatUser/ProfileChatUser";
 const Navbar = lazy(() => import('../Pages/Navbar/Navbar'));
 const Chat = lazy(() => import('../Components/Chat/Chat'));
 
-export default function Dashboard({user, listUser}) {
+export default function Dashboard({user, listUser, getLatestChat}) {
 
     const [navbarBoxStatus, setNavbarStatus] = useState(false);
     const [icon, setIconInput] = useState(false);
@@ -106,8 +106,8 @@ export default function Dashboard({user, listUser}) {
 
                         <div onScroll={(e) => getValue(e)} className={"overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2"}>
                             {
-                                listUser.map((user) => (
-                                    <ProfileChatUser id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
+                                getLatestChat.map((user) => (
+                                    <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : user.chats[0]['message']} id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
                                 ))
                             }
                         </div>

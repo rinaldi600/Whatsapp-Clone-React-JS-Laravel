@@ -39,7 +39,7 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $userSendNotification = User::first();
+        $userSendNotification = User::where('id_user', $request->input('to_this'))->first();
 
         $idChat = 'CHAT - ' . uniqid();
 
@@ -59,7 +59,7 @@ class MessageController extends Controller
 
 
         broadcast(new MessagePrivateEvent($user, $detailChat));
-        $userSendNotification->notify(new RealTimeNotification('Test 1 2 3'));
+        $userSendNotification->notify(new RealTimeNotification($request->input('message')));
         return Redirect::back()->with([
             'success' => 'WORK'
         ]);

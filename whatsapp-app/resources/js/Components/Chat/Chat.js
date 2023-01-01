@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useEffect, useState} from "react";
+import React, {lazy, Suspense, useEffect, useRef, useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import {show, close} from '../../features/modalBoxChat';
 import {Inertia} from "@inertiajs/inertia";
@@ -15,16 +15,23 @@ function Chat() {
     const userSlice = useSelector(state => state.userSlice.value);
     const dispatch = useDispatch();
     const [getMessage, setValueMessage] = useState('');
+    const inputRef = useRef(null);
+    const chatContainer = useRef(null);
 
     useEffect(() => {
-        Echo.private(`App.Models.User.${userSlice?.id}`)
+        Echo.private(`App.Models.User.${userCurrent?.id}`)
             .notification((notification) => {
                 console.log(notification);
             });
         Echo.private(`users.${userSlice?.id}`)
             .listen('MessagePrivateEvent', (e) => {
-                console.log(e);
+                setRealTimeChat(oldArray => [...oldArray, e])
             });
+    });
+
+    useEffect(() => {
+        chatContainer.current.scrollIntoView(false);
+        console.log(currentRealTimeChat);
     });
 
     const sendMessage = () => {
@@ -32,6 +39,7 @@ function Chat() {
             'to_this' : userSlice?.idUser,
             'message' : getMessage
         });
+        inputRef.current.value = '';
     };
 
     return (
@@ -56,12 +64,27 @@ function Chat() {
                     <NavbarChat/>
                 </Suspense>
                 <div className={"h-[638px] text-sm text-[#111b21] scrollbar-hide overflow-y-scroll"}>
-                    <div className={"w-[90%] h-full mx-auto"}>
+                    <div ref={chatContainer} className={"w-[90%] min-h-full mx-auto"}>
                         {
                             chatSlice.map((chat) => (
-                                <div className={`p-1 mt-1 w-fit rounded-lg ${chat.from_this === userCurrent.id_user ? 'bg-[#D9FDD3]' : 'bg-white' }`}>
-                                    <p className={"break-words"}>{chat.message}</p>
+                                <div className={`p-1 w-[100%] flex ${chat.from_this === userCurrent.id_user ? 'justify-end' : 'justify-start' } mt-1 mb-1 w-fit rounded-lg`}>
+                                    <div className={`${chat.from_this === userCurrent.id_user ? 'bg-[#D9FDD3]' : 'bg-white' } p-2 rounded-lg`}>
+                                        <p className={"break-words"}>{chat.message}</p>
+                                    </div>
                                 </div>
+                            ))
+                        }
+                        {
+                            currentRealTimeChat.length <= 0 ?
+                                ''
+                                :
+                                currentRealTimeChat.map((chatReal) => (
+                                    <div className={`p-1 w-[100%] flex justify-start mt-1 mb-1 w-fit rounded-lg`}>
+                                        <div className={`bg-white p-2 rounded-lg`}>
+                                            {/*<p className={"break-words"}>{chatReal.message}</p>*/}
+                                            <p>{chatReal.message.message}</p>
+                                        </div>
+                                    </div>
                             ))
                         }
                     </div>
@@ -77,7 +100,7 @@ function Chat() {
                 </div>
                 <div className={"w-[892.925px] flex h-full rounded-lg overflow-hidden"}>
                     <div className={"w-[832.925px] bg-transparent flex items-center h-full"}>
-                        <input onChange={(e) => setValueMessage(e.target.value)} type="text" className={"w-full rounded-lg font-normal h-full bg-white border-transparent focus:border-transparent focus:ring-0"} placeholder={"Ketik Pesan"}/>
+                        <input ref={inputRef} onChange={(e) => setValueMessage(e.target.value)} type="text" className={"w-full rounded-lg font-normal h-full bg-white border-transparent focus:border-transparent focus:ring-0"} placeholder={"Ketik Pesan"}/>
                     </div>
                     <div className={"w-[37px] flex items-center justify-center"}>
                         <button onClick={sendMessage}>

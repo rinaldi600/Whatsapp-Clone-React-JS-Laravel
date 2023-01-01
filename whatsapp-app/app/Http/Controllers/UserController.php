@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Notifications\ChatNotification;
+use App\Notifications\RealTimeNotification;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +14,15 @@ class UserController extends Controller
 {
 
     public function index() {
+
         return Inertia::render('Dashboard',[
             'user' => \Illuminate\Support\Facades\Auth::user(),
             'listUser' => User::where('id_user', '!=' ,Auth::user()['id_user'])->get(),
+            'getLatestChat' => User::with(['chats' => function ($query) {
+                    $query->where('to_this', Auth::user()['id_user'])->orderBy('updated_at','desc')->first();
+            }])->where('id_user','!=', Auth::user()['id_user'])->get(),
         ]);
+
     }
 
     public function redirectGoogle() {

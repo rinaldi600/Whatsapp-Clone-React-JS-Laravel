@@ -4918,7 +4918,8 @@ var Chat = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.lazy)(function () 
 function Dashboard(_ref) {
   var _user$photo_profile;
   var user = _ref.user,
-    listUser = _ref.listUser;
+    listUser = _ref.listUser,
+    getLatestChat = _ref.getLatestChat;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     navbarBoxStatus = _useState2[0],
@@ -5114,13 +5115,14 @@ function Dashboard(_ref) {
               return getValue(e);
             },
             className: "overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2",
-            children: listUser.map(function (user) {
+            children: getLatestChat.map(function (user) {
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                chat: user.chats.length <= 0 ? '' : user.chats[0]['message'],
                 id: user.id,
                 profile: user.photo_profile,
                 name: user.name,
                 idUser: user.id_user
-              });
+              }, user.id);
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -5563,7 +5565,8 @@ function ProfileChatUser(_ref) {
   var profile = _ref.profile,
     name = _ref.name,
     idUser = _ref.idUser,
-    id = _ref.id;
+    id = _ref.id,
+    chat = _ref.chat;
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
   var chatUser = function chatUser() {
@@ -5585,7 +5588,7 @@ function ProfileChatUser(_ref) {
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     onClick: chatUser,
-    className: "flex hover:bg-[#F5F6F6] hover:rounded-[5px] hover:p-2 gap-3 items-center cursor-pointer bg-white",
+    className: "flex hover:bg-[#F5F6F6] hover:rounded-[5px] mb-3 hover:p-2 gap-3 items-center cursor-pointer bg-white",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "w-[45px] h-[45px] overflow-hidden rounded-full bg-yellow-400",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
@@ -5603,7 +5606,7 @@ function ProfileChatUser(_ref) {
           children: name
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
           className: "text-[#3b4a54] text-sm",
-          children: "Oke berangkat..."
+          children: chat
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
