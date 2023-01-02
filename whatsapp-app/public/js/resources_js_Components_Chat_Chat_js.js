@@ -72,12 +72,17 @@ function Chat() {
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     chatContainer.current.scrollIntoView(false);
-    console.log(currentRealTimeChat);
   });
   var sendMessage = function sendMessage() {
     _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_3__.Inertia.post('/post/chat', {
       'to_this': userSlice === null || userSlice === void 0 ? void 0 : userSlice.idUser,
       'message': getMessage
+    });
+    setRealTimeChat(function (oldArray) {
+      return [].concat(_toConsumableArray(oldArray), [{
+        'to_this': userSlice === null || userSlice === void 0 ? void 0 : userSlice.idUser,
+        'message': getMessage
+      }]);
     });
     inputRef.current.value = '';
   };
@@ -135,9 +140,9 @@ function Chat() {
           className: "w-[90%] min-h-full mx-auto",
           children: [chatSlice.map(function (chat) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "p-1 w-[100%] flex ".concat(chat.from_this === userCurrent.id_user ? 'justify-end' : 'justify-start', " mt-1 mb-1 w-fit rounded-lg"),
+              className: "p-1 w-full flex ".concat((chat === null || chat === void 0 ? void 0 : chat.from_this) === (userCurrent === null || userCurrent === void 0 ? void 0 : userCurrent.id_user) ? 'justify-end' : 'justify-start', " mt-1 mb-1 rounded-lg"),
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                className: "".concat(chat.from_this === userCurrent.id_user ? 'bg-[#D9FDD3]' : 'bg-white', " p-2 rounded-lg"),
+                className: "".concat((chat === null || chat === void 0 ? void 0 : chat.from_this) === (userCurrent === null || userCurrent === void 0 ? void 0 : userCurrent.id_user) ? 'bg-[#D9FDD3]' : 'bg-white', " p-2 rounded-lg"),
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
                   className: "break-words",
                   children: chat.message
@@ -146,11 +151,12 @@ function Chat() {
             });
           }), currentRealTimeChat.length <= 0 ? '' : currentRealTimeChat.map(function (chatReal) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "p-1 w-[100%] flex justify-start mt-1 mb-1 w-fit rounded-lg",
+              className: "p-1 w-full flex ".concat(chatReal.hasOwnProperty('id') ? 'justify-start' : 'justify-end', " mt-1 mb-1 rounded-lg"),
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                className: "bg-white p-2 rounded-lg",
+                className: "".concat(chatReal.hasOwnProperty('id') ? 'bg-white' : 'bg-[#D9FDD3]', " p-2 rounded-lg"),
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-                  children: chatReal.message.message
+                  className: "break-words",
+                  children: chatReal.hasOwnProperty('id') ? chatReal.message.message : chatReal.message
                 })
               })
             });

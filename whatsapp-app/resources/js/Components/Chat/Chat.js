@@ -31,7 +31,6 @@ function Chat() {
 
     useEffect(() => {
         chatContainer.current.scrollIntoView(false);
-        console.log(currentRealTimeChat);
     });
 
     const sendMessage = () => {
@@ -39,6 +38,10 @@ function Chat() {
             'to_this' : userSlice?.idUser,
             'message' : getMessage
         });
+        setRealTimeChat(oldArray => [...oldArray, {
+            'to_this' : userSlice?.idUser,
+            'message' : getMessage
+        }]);
         inputRef.current.value = '';
     };
 
@@ -67,8 +70,8 @@ function Chat() {
                     <div ref={chatContainer} className={"w-[90%] min-h-full mx-auto"}>
                         {
                             chatSlice.map((chat) => (
-                                <div className={`p-1 w-[100%] flex ${chat.from_this === userCurrent.id_user ? 'justify-end' : 'justify-start' } mt-1 mb-1 w-fit rounded-lg`}>
-                                    <div className={`${chat.from_this === userCurrent.id_user ? 'bg-[#D9FDD3]' : 'bg-white' } p-2 rounded-lg`}>
+                                <div className={`p-1 w-full flex ${chat?.from_this === userCurrent?.id_user ? 'justify-end' : 'justify-start' } mt-1 mb-1 rounded-lg`}>
+                                    <div className={`${chat?.from_this === userCurrent?.id_user ? 'bg-[#D9FDD3]' : 'bg-white' } p-2 rounded-lg`}>
                                         <p className={"break-words"}>{chat.message}</p>
                                     </div>
                                 </div>
@@ -79,10 +82,9 @@ function Chat() {
                                 ''
                                 :
                                 currentRealTimeChat.map((chatReal) => (
-                                    <div className={`p-1 w-[100%] flex justify-start mt-1 mb-1 w-fit rounded-lg`}>
-                                        <div className={`bg-white p-2 rounded-lg`}>
-                                            {/*<p className={"break-words"}>{chatReal.message}</p>*/}
-                                            <p>{chatReal.message.message}</p>
+                                    <div className={`p-1 w-full flex ${chatReal.hasOwnProperty('id') ? 'justify-start' : 'justify-end' } mt-1 mb-1 rounded-lg`}>
+                                        <div className={`${chatReal.hasOwnProperty('id') ? 'bg-white' : 'bg-[#D9FDD3]' } p-2 rounded-lg`}>
+                                            <p className={"break-words"}>{chatReal.hasOwnProperty('id') ? chatReal.message.message : chatReal.message}</p>
                                         </div>
                                     </div>
                             ))

@@ -3,6 +3,7 @@ import HeadComponent from "@/Pages/Head/Head";
 import LoadingProfileImage from '../../img/load.png';
 import { useSelector } from 'react-redux'
 import ProfileChatUser from "@/Pages/ProfileChatUser/ProfileChatUser";
+import ManPicture from '../../img/julian-wan-WNoLnJo7tS8-unsplash.jpg'
 
 const Navbar = lazy(() => import('../Pages/Navbar/Navbar'));
 const Chat = lazy(() => import('../Components/Chat/Chat'));
@@ -100,6 +101,26 @@ export default function Dashboard({user, listUser, getLatestChat}) {
                                     <div className={"w-full overflow-hidden"}>
                                         <input onChange={(e) => getValue(e)} onBlur={() => setIconInput(false)} onClick={() => setIconInput(true)} type="text" className={"focus:border-transparent focus:ring-0 w-full bg-transparent outline-none border-none h-full text-[15px]"} placeholder={"Cari atau mulai chat baru"}/>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className={'min-h-[50px] bg-[#E1FEF2]'}>
+                            <div className={'h-fit flex justify-end items-center'}>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         stroke-width="1.5" stroke="currentColor" className="w-6 h-6 text-[#25D366] cursor-pointer">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div className={"min-h-fit flex items-center bg-red-300"}>
+                                <div className={'w-[40px] h-[40px] rounded-full overflow-hidden'}>
+                                    <img className={'w-full h-full'} src={ManPicture} alt="Profile"/>
+                                </div>
+                                <div>
+                                    <p>TEST</p>
                                 </div>
                             </div>
                         </div>

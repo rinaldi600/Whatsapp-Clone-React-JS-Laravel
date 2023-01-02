@@ -59,7 +59,10 @@ class MessageController extends Controller
 
 
         broadcast(new MessagePrivateEvent($user, $detailChat));
-        $userSendNotification->notify(new RealTimeNotification($request->input('message')));
+        $userSendNotification->notify(new RealTimeNotification(array(
+            'from_this' => Auth::user()['name'],
+            'message' => $request->input('message'),
+        )));
         return Redirect::back()->with([
             'success' => 'WORK'
         ]);
