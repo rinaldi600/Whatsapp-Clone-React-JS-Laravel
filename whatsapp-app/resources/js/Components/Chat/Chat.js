@@ -2,6 +2,7 @@ import React, {lazy, Suspense, useEffect, useRef, useState} from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import {show, close} from '../../features/modalBoxChat';
 import {Inertia} from "@inertiajs/inertia";
+import { addNotifications } from "@/features/getNotifications";
 
 const NavbarChat = lazy(() => import('../../Pages/NavbarChat/NavbarChat'));
 
@@ -21,7 +22,7 @@ function Chat() {
     useEffect(() => {
         Echo.private(`App.Models.User.${userCurrent?.id}`)
             .notification((notification) => {
-                console.log(notification);
+                dispatch(addNotifications(notification))
             });
         Echo.private(`users.${userSlice?.id}`)
             .listen('MessagePrivateEvent', (e) => {

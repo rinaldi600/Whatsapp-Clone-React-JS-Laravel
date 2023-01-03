@@ -3,12 +3,14 @@ import modalBox from './js/features/modalBox'
 import modalBoxChatUser from './js/features/modalBoxChat';
 import userSlice from './js/features/getDetailUser';
 import chatSlice from './js/features/getChats';
+import notificationsSlice from './js/features/getNotifications'
 
 export default configureStore({
     reducer: {
         modalBox,
         modalBoxChatUser,
         userSlice,
-        chatSlice
+        chatSlice,
+        notificationsSlice
     }
 })

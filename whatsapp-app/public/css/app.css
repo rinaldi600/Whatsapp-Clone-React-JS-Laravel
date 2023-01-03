@@ -826,6 +826,10 @@ select {
 .h-\[35px\] {
   height: 35px;
 }
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
 .h-\[700px\] {
   height: 700px;
 }
@@ -844,13 +848,6 @@ select {
 .h-\[45px\] {
   height: 45px;
 }
-.h-\[20px\] {
-  height: 20px;
-}
-.h-fit {
-  height: -moz-fit-content;
-  height: fit-content;
-}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -859,6 +856,13 @@ select {
 }
 .min-h-\[59px\] {
   min-height: 59px;
+}
+.min-h-\[50px\] {
+  min-height: 50px;
+}
+.min-h-fit {
+  min-height: -moz-fit-content;
+  min-height: fit-content;
 }
 .min-h-\[700px\] {
   min-height: 700px;
@@ -874,13 +878,6 @@ select {
 }
 .min-h-full {
   min-height: 100%;
-}
-.min-h-\[50px\] {
-  min-height: 50px;
-}
-.min-h-fit {
-  min-height: -moz-fit-content;
-  min-height: fit-content;
 }
 .w-5 {
   width: 1.25rem;
@@ -921,13 +918,6 @@ select {
 .w-\[90\%\] {
   width: 90%;
 }
-.w-\[100\%\] {
-  width: 100%;
-}
-.w-fit {
-  width: -moz-fit-content;
-  width: fit-content;
-}
 .w-\[94px\] {
   width: 94px;
 }
@@ -945,15 +935,6 @@ select {
 }
 .w-\[80\%\] {
   width: 80%;
-}
-.w-\[100px\] {
-  width: 100px;
-}
-.w-\[50\%\] {
-  width: 50%;
-}
-.w-11\/12 {
-  width: 91.666667%;
 }
 .max-w-xl {
   max-width: 36rem;
@@ -1201,6 +1182,10 @@ select {
 .bg-transparent {
   background-color: transparent;
 }
+.bg-\[\#E1FEF2\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(225 254 242 / var(--tw-bg-opacity));
+}
 .bg-\[\#00A884\] {
   --tw-bg-opacity: 1;
   background-color: rgb(0 168 132 / var(--tw-bg-opacity));
@@ -1220,18 +1205,6 @@ select {
 .bg-yellow-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(250 204 21 / var(--tw-bg-opacity));
-}
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-.bg-blue-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
-}
-.bg-\[\#E1FEF2\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(225 254 242 / var(--tw-bg-opacity));
 }
 .bg-\[url\(\'https\:\/\/user-images\.githubusercontent\.com\/15075759\/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21\.png\'\)\] {
   background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
@@ -1476,6 +1449,10 @@ select {
   --tw-text-opacity: 1;
   color: rgb(84 101 111 / var(--tw-text-opacity));
 }
+.text-\[\#25D366\] {
+  --tw-text-opacity: 1;
+  color: rgb(37 211 102 / var(--tw-text-opacity));
+}
 .text-\[\#41525d\] {
   --tw-text-opacity: 1;
   color: rgb(65 82 93 / var(--tw-text-opacity));
@@ -1495,10 +1472,6 @@ select {
 .text-\[\#1FA855\] {
   --tw-text-opacity: 1;
   color: rgb(31 168 85 / var(--tw-text-opacity));
-}
-.text-\[\#25D366\] {
-  --tw-text-opacity: 1;
-  color: rgb(37 211 102 / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;

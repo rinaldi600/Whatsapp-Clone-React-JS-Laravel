@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {show} from "@/features/modalBox";
-import { useDispatch } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {close} from "@/features/modalBoxChat";
 import {getDetail} from '@/features/getDetailUser';
 import {chatsFetch} from '@/features/getChats';
@@ -10,6 +10,7 @@ function ProfileChatUser({profile, name, idUser, id, chat}) {
 
     const dispatch = useDispatch();
     const userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
+    const notifications = useSelector(state => state.notificationsSlice.value);
 
     const chatUser = () => {
         if (idUser !== '') {
@@ -30,6 +31,10 @@ function ProfileChatUser({profile, name, idUser, id, chat}) {
         dispatch(close());
         dispatch(show());
     };
+
+    useEffect(() => {
+        // console.log(notifications)
+    });
 
 
     return (
