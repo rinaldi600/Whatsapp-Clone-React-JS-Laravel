@@ -22,6 +22,7 @@ function Chat() {
     useEffect(() => {
         Echo.private(`App.Models.User.${userCurrent?.id}`)
             .notification((notification) => {
+                // console.log(notification);
                 dispatch(addNotifications(notification))
             });
         Echo.private(`users.${userSlice?.id}`)

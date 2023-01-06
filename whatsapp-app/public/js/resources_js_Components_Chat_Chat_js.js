@@ -64,6 +64,7 @@ function Chat() {
   var chatContainer = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     Echo["private"]("App.Models.User.".concat(userCurrent === null || userCurrent === void 0 ? void 0 : userCurrent.id)).notification(function (notification) {
+      // console.log(notification);
       dispatch((0,_features_getNotifications__WEBPACK_IMPORTED_MODULE_4__.addNotifications)(notification));
     });
     Echo["private"]("users.".concat(userSlice === null || userSlice === void 0 ? void 0 : userSlice.id)).listen('MessagePrivateEvent', function (e) {

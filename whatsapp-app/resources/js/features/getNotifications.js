@@ -3,16 +3,18 @@ import { createSlice } from '@reduxjs/toolkit'
 export const notificationsSlice = createSlice({
     name: 'coverNotifications',
     initialState: {
-        value: []
+        value: {
+
+        }
     },
     reducers: {
         addNotifications: (state, action) => {
             return {
                 ...state,
-                value : [
+                value : {
                     ...state.value,
-                    action.payload.message,
-                ]
+                    [action.payload.message['id_user']] : action.payload.message,
+                }
             }
         },
     }

@@ -4934,7 +4934,11 @@ function Dashboard(_ref) {
   var box = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
     return state.modalBox.value;
   });
+  var notifications = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
+    return state.notificationsSlice.value;
+  });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log(notifications);
     sessionStorage.setItem("userDetail", JSON.stringify(user));
   });
   var showNavbar = function showNavbar() {
@@ -5115,13 +5119,20 @@ function Dashboard(_ref) {
             },
             className: "overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2",
             children: getLatestChat.map(function (user) {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                chat: user.chats.length <= 0 ? '' : user.chats[0]['message'],
-                id: user.id,
-                profile: user.photo_profile,
-                name: user.name,
-                idUser: user.id_user
-              }, user.id);
+              return (
+                /*#__PURE__*/
+                // <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : user.chats[0]['message']} id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
+                (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                  chat: user.chats.length <= 0 ? '' : notifications.hasOwnProperty(user.id_user) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                    className: 'font-medium',
+                    children: notifications[user.id_user].message
+                  }) : user.chats[0]['message'],
+                  id: user.id,
+                  profile: user.photo_profile,
+                  name: user.name,
+                  idUser: user.id_user
+                }, user.id)
+              );
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -5568,10 +5579,13 @@ function ProfileChatUser(_ref) {
     chat = _ref.chat;
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
-  var notifications = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
-    return state.notificationsSlice.value;
-  });
+  var chatLatest = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   var chatUser = function chatUser() {
+    // if (chatLatest.current.hasChildNodes()) {
+    //     // console.log("WORK")
+    //     chatLatest.current.childNodes[0].classList.remove("font-medium");
+    // }
+
     if (idUser !== '') {
       axios__WEBPACK_IMPORTED_MODULE_6___default().get("/chats/".concat(userCurrent === null || userCurrent === void 0 ? void 0 : userCurrent.id_user, "/").concat(idUser)).then(function (success) {
         dispatch((0,_features_getChats__WEBPACK_IMPORTED_MODULE_5__.chatsFetch)(success.data));
@@ -5588,9 +5602,6 @@ function ProfileChatUser(_ref) {
     dispatch((0,_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_3__.close)());
     dispatch((0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.show)());
   };
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    // console.log(notifications)
-  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     onClick: chatUser,
     className: "flex hover:bg-[#F5F6F6] hover:rounded-[5px] mb-3 hover:p-2 gap-3 items-center cursor-pointer bg-white",
@@ -5610,6 +5621,7 @@ function ProfileChatUser(_ref) {
           className: "font-medium text-[#111b21] text-lg",
           children: name
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+          ref: chatLatest,
           className: "text-[#3b4a54] text-sm",
           children: chat
         })]
@@ -6092,12 +6104,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "notificationsSlice": () => (/* binding */ notificationsSlice)
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -6105,12 +6111,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var notificationsSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
   name: 'coverNotifications',
   initialState: {
-    value: []
+    value: {}
   },
   reducers: {
     addNotifications: function addNotifications(state, action) {
       return _objectSpread(_objectSpread({}, state), {}, {
-        value: [].concat(_toConsumableArray(state.value), [action.payload.message])
+        value: _objectSpread(_objectSpread({}, state.value), {}, _defineProperty({}, action.payload.message['id_user'], action.payload.message))
       });
     }
   }

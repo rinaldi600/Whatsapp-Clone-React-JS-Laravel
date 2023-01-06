@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {show} from "@/features/modalBox";
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {close} from "@/features/modalBoxChat";
 import {getDetail} from '@/features/getDetailUser';
 import {chatsFetch} from '@/features/getChats';
@@ -10,9 +10,14 @@ function ProfileChatUser({profile, name, idUser, id, chat}) {
 
     const dispatch = useDispatch();
     const userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
-    const notifications = useSelector(state => state.notificationsSlice.value);
+    const chatLatest = useRef(null);
 
     const chatUser = () => {
+        // if (chatLatest.current.hasChildNodes()) {
+        //     // console.log("WORK")
+        //     chatLatest.current.childNodes[0].classList.remove("font-medium");
+        // }
+
         if (idUser !== '') {
             axios.get(`/chats/${userCurrent?.id_user}/${idUser}`)
                 .then((success) => {
@@ -32,10 +37,6 @@ function ProfileChatUser({profile, name, idUser, id, chat}) {
         dispatch(show());
     };
 
-    useEffect(() => {
-        // console.log(notifications)
-    });
-
 
     return (
         <div onClick={chatUser} className={"flex hover:bg-[#F5F6F6] hover:rounded-[5px] mb-3 hover:p-2 gap-3 items-center cursor-pointer bg-white"}>
@@ -45,7 +46,7 @@ function ProfileChatUser({profile, name, idUser, id, chat}) {
             <div className={"flex justify-between w-[80%] border-b-[0.5px] border-[#E9EDEF]"}>
                 <div className={"mb-1"}>
                     <p className={"font-medium text-[#111b21] text-lg"}>{name}</p>
-                    <p className={"text-[#3b4a54] text-sm"}>{chat}</p>
+                    <p ref={chatLatest} className={"text-[#3b4a54] text-sm"}>{chat}</p>
                 </div>
                 <div>
                     <p className={"text-[#1FA855] text-xs font-semibold"}>19.40</p>

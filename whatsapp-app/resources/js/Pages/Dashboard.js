@@ -13,8 +13,10 @@ export default function Dashboard({user, getLatestChat}) {
     const [icon, setIconInput] = useState(false);
     const [sticky, setSticky] = useState(false);
     const box = useSelector(state => state.modalBox.value);
+    const notifications = useSelector(state => state.notificationsSlice.value);
 
     useEffect(() => {
+        console.log(notifications);
         sessionStorage.setItem("userDetail", JSON.stringify(user));
     });
 
@@ -25,7 +27,6 @@ export default function Dashboard({user, getLatestChat}) {
             setNavbarStatus(false);
         }
     };
-
 
     const getValue = (e) => {
         if (e.target.scrollTop >= 200) {
@@ -107,7 +108,8 @@ export default function Dashboard({user, getLatestChat}) {
                         <div onScroll={(e) => getValue(e)} className={"overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2"}>
                             {
                                 getLatestChat.map((user) => (
-                                    <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : user.chats[0]['message']} id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
+                                    // <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : user.chats[0]['message']} id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
+                                    <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : (notifications.hasOwnProperty(user.id_user) ? <span className={'font-medium'}>{notifications[user.id_user].message}</span> : user.chats[0]['message'])} id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
                                 ))
                             }
                         </div>
