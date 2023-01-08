@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import {show} from "@/features/modalBox";
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {close} from "@/features/modalBoxChat";
 import {getDetail} from '@/features/getDetailUser';
 import {chatsFetch} from '@/features/getChats';
@@ -11,13 +11,9 @@ function ProfileChatUser({profile, name, idUser, id, chat}) {
     const dispatch = useDispatch();
     const userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
     const chatLatest = useRef(null);
+    const userInChatBox = useSelector(state => state.chatBoxUserDetail.value);
 
     const chatUser = () => {
-        // if (chatLatest.current.hasChildNodes()) {
-        //     // console.log("WORK")
-        //     chatLatest.current.childNodes[0].classList.remove("font-medium");
-        // }
-
         if (idUser !== '') {
             axios.get(`/chats/${userCurrent?.id_user}/${idUser}`)
                 .then((success) => {
@@ -35,8 +31,19 @@ function ProfileChatUser({profile, name, idUser, id, chat}) {
         }));
         dispatch(close());
         dispatch(show());
+
+        try {
+            if (chatLatest.current.childNodes.length > 0) {
+                chatLatest.current.childNodes[0].classList.remove("font-medium");
+            }
+        } catch (e) {
+            console.log("Tidak ada pesan terbaru")
+        }
     };
 
+    useEffect(() => {
+        console.log(userInChatBox);
+    });
 
     return (
         <div onClick={chatUser} className={"flex hover:bg-[#F5F6F6] hover:rounded-[5px] mb-3 hover:p-2 gap-3 items-center cursor-pointer bg-white"}>

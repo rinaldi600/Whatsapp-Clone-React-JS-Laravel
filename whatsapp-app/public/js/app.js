@@ -5580,12 +5580,10 @@ function ProfileChatUser(_ref) {
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
   var userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
   var chatLatest = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+  var userInChatBox = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
+    return state.chatBoxUserDetail.value;
+  });
   var chatUser = function chatUser() {
-    // if (chatLatest.current.hasChildNodes()) {
-    //     // console.log("WORK")
-    //     chatLatest.current.childNodes[0].classList.remove("font-medium");
-    // }
-
     if (idUser !== '') {
       axios__WEBPACK_IMPORTED_MODULE_6___default().get("/chats/".concat(userCurrent === null || userCurrent === void 0 ? void 0 : userCurrent.id_user, "/").concat(idUser)).then(function (success) {
         dispatch((0,_features_getChats__WEBPACK_IMPORTED_MODULE_5__.chatsFetch)(success.data));
@@ -5601,7 +5599,17 @@ function ProfileChatUser(_ref) {
     }));
     dispatch((0,_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_3__.close)());
     dispatch((0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.show)());
+    try {
+      if (chatLatest.current.childNodes.length > 0) {
+        chatLatest.current.childNodes[0].classList.remove("font-medium");
+      }
+    } catch (e) {
+      console.log("Tidak ada pesan terbaru");
+    }
   };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log(userInChatBox);
+  });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     onClick: chatUser,
     className: "flex hover:bg-[#F5F6F6] hover:rounded-[5px] mb-3 hover:p-2 gap-3 items-center cursor-pointer bg-white",
@@ -6001,10 +6009,55 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: larasocket_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-  token: '3117|UJAY4n0FHrpZ1AdBBkU12svDDLmUb5Pts0kuZcBZ',
+  token: '3168|ei51muw0Y3zcKRGn7IOUebcp7YYmLkD27yVLSqul',
   // required
   debug: true / false
 });
+
+/***/ }),
+
+/***/ "./resources/js/features/chatBoxUserDetail.js":
+/*!****************************************************!*\
+  !*** ./resources/js/features/chatBoxUserDetail.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "chatDetailUserSlice": () => (/* binding */ chatDetailUserSlice),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "getUserInChatBox": () => (/* binding */ getUserInChatBox),
+/* harmony export */   "removeIdUser": () => (/* binding */ removeIdUser)
+/* harmony export */ });
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var chatDetailUserSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
+  name: 'chatDetailUserSlice',
+  initialState: {
+    value: {}
+  },
+  reducers: {
+    getUserInChatBox: function getUserInChatBox(state, action) {
+      return _objectSpread(_objectSpread({}, state), {}, {
+        value: _objectSpread(_objectSpread({}, state.value), {}, _defineProperty({}, action.payload.idUser, action.payload))
+      });
+    },
+    removeIdUser: function removeIdUser(state) {
+      state.value = {};
+    }
+  }
+});
+
+// Action creators are generated for each case reducer function
+var _chatDetailUserSlice$ = chatDetailUserSlice.actions,
+  getUserInChatBox = _chatDetailUserSlice$.getUserInChatBox,
+  removeIdUser = _chatDetailUserSlice$.removeIdUser;
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (chatDetailUserSlice.reducer);
 
 /***/ }),
 
@@ -6228,25 +6281,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 /* harmony import */ var _js_features_modalBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./js/features/modalBox */ "./resources/js/features/modalBox.js");
 /* harmony import */ var _js_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/features/modalBoxChat */ "./resources/js/features/modalBoxChat.js");
 /* harmony import */ var _js_features_getDetailUser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./js/features/getDetailUser */ "./resources/js/features/getDetailUser.js");
 /* harmony import */ var _js_features_getChats__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./js/features/getChats */ "./resources/js/features/getChats.js");
 /* harmony import */ var _js_features_getNotifications__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./js/features/getNotifications */ "./resources/js/features/getNotifications.js");
+/* harmony import */ var _js_features_chatBoxUserDetail__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/features/chatBoxUserDetail */ "./resources/js/features/chatBoxUserDetail.js");
 
 
 
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_5__.configureStore)({
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_6__.configureStore)({
   reducer: {
     modalBox: _js_features_modalBox__WEBPACK_IMPORTED_MODULE_0__["default"],
     modalBoxChatUser: _js_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_1__["default"],
     userSlice: _js_features_getDetailUser__WEBPACK_IMPORTED_MODULE_2__["default"],
     chatSlice: _js_features_getChats__WEBPACK_IMPORTED_MODULE_3__["default"],
-    notificationsSlice: _js_features_getNotifications__WEBPACK_IMPORTED_MODULE_4__["default"]
+    notificationsSlice: _js_features_getNotifications__WEBPACK_IMPORTED_MODULE_4__["default"],
+    chatBoxUserDetail: _js_features_chatBoxUserDetail__WEBPACK_IMPORTED_MODULE_5__["default"]
   }
 }));
 

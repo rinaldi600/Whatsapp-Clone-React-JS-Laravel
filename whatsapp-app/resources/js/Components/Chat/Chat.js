@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {show, close} from '../../features/modalBoxChat';
 import {Inertia} from "@inertiajs/inertia";
 import { addNotifications } from "@/features/getNotifications";
+import { getUserInChatBox, removeIdUser } from '../../features/chatBoxUserDetail'
 
 const NavbarChat = lazy(() => import('../../Pages/NavbarChat/NavbarChat'));
 
@@ -20,15 +21,23 @@ function Chat() {
     const chatContainer = useRef(null);
 
     useEffect(() => {
-        Echo.private(`App.Models.User.${userCurrent?.id}`)
-            .notification((notification) => {
-                // console.log(notification);
-                dispatch(addNotifications(notification))
-            });
-        Echo.private(`users.${userSlice?.id}`)
-            .listen('MessagePrivateEvent', (e) => {
-                setRealTimeChat(oldArray => [...oldArray, e])
-            });
+        if (box) {
+            const addUser = {
+                idUser : userSlice.idUser,
+                open : true
+            };
+            dispatch(removeIdUser());
+            dispatch(getUserInChatBox(addUser));
+        }
+        // Echo.private(`App.Models.User.${userCurrent?.id}`)
+        //     .notification((notification) => {
+        //         // console.log(notification);
+        //         dispatch(addNotifications(notification))
+        //     });
+        // Echo.private(`users.${userSlice?.id}`)
+        //     .listen('MessagePrivateEvent', (e) => {
+        //         setRealTimeChat(oldArray => [...oldArray, e])
+        //     });
     });
 
     useEffect(() => {
@@ -44,7 +53,7 @@ function Chat() {
             'to_this' : userSlice?.idUser,
             'message' : getMessage
         }]);
-        inputRef.current.value = '';
+        // inputRef.current.value = '';
     };
 
     return (
@@ -79,18 +88,18 @@ function Chat() {
                                 </div>
                             ))
                         }
-                        {
-                            currentRealTimeChat.length <= 0 ?
-                                ''
-                                :
-                                currentRealTimeChat.map((chatReal) => (
-                                    <div className={`p-1 w-full flex ${chatReal.hasOwnProperty('id') ? 'justify-start' : 'justify-end' } mt-1 mb-1 rounded-lg`}>
-                                        <div className={`${chatReal.hasOwnProperty('id') ? 'bg-white' : 'bg-[#D9FDD3]' } p-2 rounded-lg`}>
-                                            <p className={"break-words"}>{chatReal.hasOwnProperty('id') ? chatReal.message.message : chatReal.message}</p>
-                                        </div>
-                                    </div>
-                            ))
-                        }
+                        {/*{*/}
+                        {/*    currentRealTimeChat.length <= 0 ?*/}
+                        {/*        ''*/}
+                        {/*        :*/}
+                        {/*        currentRealTimeChat.map((chatReal) => (*/}
+                        {/*            <div className={`p-1 w-full flex ${chatReal.hasOwnProperty('id') ? 'justify-start' : 'justify-end' } mt-1 mb-1 rounded-lg`}>*/}
+                        {/*                <div className={`${chatReal.hasOwnProperty('id') ? 'bg-white' : 'bg-[#D9FDD3]' } p-2 rounded-lg`}>*/}
+                        {/*                    <p className={"break-words"}>{chatReal.hasOwnProperty('id') ? chatReal.message.message : chatReal.message}</p>*/}
+                        {/*                </div>*/}
+                        {/*            </div>*/}
+                        {/*    ))*/}
+                        {/*}*/}
                     </div>
                 </div>
             </div>

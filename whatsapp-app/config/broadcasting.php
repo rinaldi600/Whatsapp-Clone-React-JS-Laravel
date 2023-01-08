@@ -43,7 +43,7 @@ return [
 
         'larasocket' => [
             'driver' => 'larasocket',
-            'token' => '3117|UJAY4n0FHrpZ1AdBBkU12svDDLmUb5Pts0kuZcBZ',
+            'token' => '3168|ei51muw0Y3zcKRGn7IOUebcp7YYmLkD27yVLSqul',
         ],
 
         'ably' => [

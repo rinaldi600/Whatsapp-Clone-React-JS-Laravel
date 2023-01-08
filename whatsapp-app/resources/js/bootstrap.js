@@ -30,7 +30,7 @@ import Larasocket from 'larasocket-js';
 
 window.Echo = new Echo({
     broadcaster: Larasocket,
-    token: '3117|UJAY4n0FHrpZ1AdBBkU12svDDLmUb5Pts0kuZcBZ', // required
+    token: '3168|ei51muw0Y3zcKRGn7IOUebcp7YYmLkD27yVLSqul', // required
     debug: true/false,
 });
 
