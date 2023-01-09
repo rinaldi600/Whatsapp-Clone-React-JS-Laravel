@@ -21,23 +21,15 @@ function Chat() {
     const chatContainer = useRef(null);
 
     useEffect(() => {
-        if (box) {
-            const addUser = {
-                idUser : userSlice.idUser,
-                open : true
-            };
-            dispatch(removeIdUser());
-            dispatch(getUserInChatBox(addUser));
-        }
-        // Echo.private(`App.Models.User.${userCurrent?.id}`)
-        //     .notification((notification) => {
-        //         // console.log(notification);
-        //         dispatch(addNotifications(notification))
-        //     });
-        // Echo.private(`users.${userSlice?.id}`)
-        //     .listen('MessagePrivateEvent', (e) => {
-        //         setRealTimeChat(oldArray => [...oldArray, e])
-        //     });
+        Echo.private(`App.Models.User.${userCurrent?.id}`)
+            .notification((notification) => {
+                console.log(notification);
+                dispatch(addNotifications(notification))
+            });
+        Echo.private(`users.${userSlice?.id}`)
+            .listen('MessagePrivateEvent', (e) => {
+                setRealTimeChat(oldArray => [...oldArray, e])
+            });
     });
 
     useEffect(() => {
@@ -53,11 +45,22 @@ function Chat() {
             'to_this' : userSlice?.idUser,
             'message' : getMessage
         }]);
-        // inputRef.current.value = '';
+        inputRef.current.value = '';
+    };
+
+    const getUserFast = () => {
+        if (box) {
+            const addUser = {
+                idUser : userSlice.idUser,
+                open : true
+            };
+            dispatch(removeIdUser());
+            dispatch(getUserInChatBox(addUser));
+        }
     };
 
     return (
-        <div className={`${box ? 'block' : 'hidden'} scrollbar-hide overflow-y-scroll w-full h-full bg-white`}>
+        <div onLoad={getUserFast} className={`${box ? 'block' : 'hidden'} scrollbar-hide overflow-y-scroll w-full h-full bg-white`}>
             <div className={"min-h-[59px] flex justify-between relative items-center p-2 bg-[#F0F2F5] sticky top-[-1px]"}>
                 <div className={"flex items-center gap-2"}>
                     <div className={"w-[40px] h-[40px] rounded-full bg-white overflow-hidden"}>
@@ -88,18 +91,18 @@ function Chat() {
                                 </div>
                             ))
                         }
-                        {/*{*/}
-                        {/*    currentRealTimeChat.length <= 0 ?*/}
-                        {/*        ''*/}
-                        {/*        :*/}
-                        {/*        currentRealTimeChat.map((chatReal) => (*/}
-                        {/*            <div className={`p-1 w-full flex ${chatReal.hasOwnProperty('id') ? 'justify-start' : 'justify-end' } mt-1 mb-1 rounded-lg`}>*/}
-                        {/*                <div className={`${chatReal.hasOwnProperty('id') ? 'bg-white' : 'bg-[#D9FDD3]' } p-2 rounded-lg`}>*/}
-                        {/*                    <p className={"break-words"}>{chatReal.hasOwnProperty('id') ? chatReal.message.message : chatReal.message}</p>*/}
-                        {/*                </div>*/}
-                        {/*            </div>*/}
-                        {/*    ))*/}
-                        {/*}*/}
+                        {
+                            currentRealTimeChat.length <= 0 ?
+                                ''
+                                :
+                                currentRealTimeChat.map((chatReal) => (
+                                    <div className={`p-1 w-full flex ${chatReal.hasOwnProperty('id') ? 'justify-start' : 'justify-end' } mt-1 mb-1 rounded-lg`}>
+                                        <div className={`${chatReal.hasOwnProperty('id') ? 'bg-white' : 'bg-[#D9FDD3]' } p-2 rounded-lg`}>
+                                            <p className={"break-words"}>{chatReal.hasOwnProperty('id') ? chatReal.message.message : chatReal.message}</p>
+                                        </div>
+                                    </div>
+                            ))
+                        }
                     </div>
                 </div>
             </div>

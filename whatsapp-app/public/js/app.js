@@ -4937,8 +4937,12 @@ function Dashboard(_ref) {
   var notifications = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
     return state.notificationsSlice.value;
   });
+  var userInChatBox = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(function (state) {
+    return state.chatBoxUserDetail.value;
+  });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     console.log(notifications);
+    console.log(userInChatBox);
     sessionStorage.setItem("userDetail", JSON.stringify(user));
   });
   var showNavbar = function showNavbar() {
@@ -5122,11 +5126,16 @@ function Dashboard(_ref) {
               return (
                 /*#__PURE__*/
                 // <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : user.chats[0]['message']} id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
+                // <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : (notifications.hasOwnProperty(user.id_user) ? <span className={'font-medium'}>{notifications[user.id_user].message}</span> : user.chats[0]['message'])} id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
+                // <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : (notifications.hasOwnProperty(user.id_user) ? (userInChatBox.hasOwnProperty(user.id_user) ? (notifications[user.id_user].id_user === userInChatBox[user.id_user].idUser ? notifications[user.id_user].message : <span className={'font-medium'}>{notifications[user.id_user].message}</span> ) : <span className={'font-medium'}>{notifications[user.id_user].message}</span> ) : user.chats[0].message ) } id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
                 (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                  chat: user.chats.length <= 0 ? '' : notifications.hasOwnProperty(user.id_user) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                  chat: user.chats.length <= 0 ? '' : notifications.hasOwnProperty(user.id_user) ? userInChatBox.hasOwnProperty(user.id_user) ? notifications[user.id_user].id_user === userInChatBox[user.id_user].idUser ? notifications[user.id_user].message : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                     className: 'font-medium',
                     children: notifications[user.id_user].message
-                  }) : user.chats[0]['message'],
+                  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                    className: 'font-medium',
+                    children: notifications[user.id_user].message
+                  }) : user.chats[0].message,
                   id: user.id,
                   profile: user.photo_profile,
                   name: user.name,
@@ -5465,7 +5474,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _features_modalBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/features/modalBox */ "./resources/js/features/modalBox.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _features_chatBoxUserDetail__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../features/chatBoxUserDetail */ "./resources/js/features/chatBoxUserDetail.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -5476,20 +5487,22 @@ function NavbarChat() {
   var navbarChatUser = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.modalBoxChatUser.value;
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  var closeButton = function closeButton() {
+    dispatch((0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.close)());
+    dispatch((0,_features_chatBoxUserDetail__WEBPACK_IMPORTED_MODULE_3__.removeIdUser)());
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "".concat(navbarChatUser ? 'grid' : 'hidden', " text-[#3b4a54] font-[15px] bg-white justify-center items-center h-[200px] bg-white shadow-lg rounded-lg absolute top-[20%] md:top-[10%] right-1 sm:w-[192px] w-full"),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
       children: "Info Kontak"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
       children: "Pilih Pesan"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
       children: "Pesan Berbintang"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
       children: "Pesan Sementara"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-      onClick: function onClick() {
-        return dispatch((0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.close)());
-      },
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+      onClick: closeButton,
       className: "text-left hover:font-bold",
       children: "Tutup Chat"
     })]
