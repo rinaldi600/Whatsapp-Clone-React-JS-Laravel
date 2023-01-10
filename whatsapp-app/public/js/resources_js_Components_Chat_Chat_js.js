@@ -70,6 +70,10 @@ function Chat() {
       dispatch((0,_features_getNotifications__WEBPACK_IMPORTED_MODULE_4__.addNotifications)(notification));
     });
     Echo["private"]("users.".concat(userSlice === null || userSlice === void 0 ? void 0 : userSlice.id)).listen('MessagePrivateEvent', function (e) {
+      var _e$message;
+      if ((userCurrent === null || userCurrent === void 0 ? void 0 : userCurrent.id_user) !== ((_e$message = e.message) === null || _e$message === void 0 ? void 0 : _e$message.to_this)) {
+        return false;
+      }
       setRealTimeChat(function (oldArray) {
         return [].concat(_toConsumableArray(oldArray), [e]);
       });
@@ -100,6 +104,7 @@ function Chat() {
       dispatch((0,_features_chatBoxUserDetail__WEBPACK_IMPORTED_MODULE_5__.removeIdUser)());
       dispatch((0,_features_chatBoxUserDetail__WEBPACK_IMPORTED_MODULE_5__.getUserInChatBox)(addUser));
     }
+    setRealTimeChat([]);
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     onLoad: getUserFast,

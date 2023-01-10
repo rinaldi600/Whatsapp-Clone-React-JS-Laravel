@@ -24,10 +24,13 @@ function Chat() {
         Echo.private(`App.Models.User.${userCurrent?.id}`)
             .notification((notification) => {
                 console.log(notification);
-                dispatch(addNotifications(notification))
+                dispatch(addNotifications(notification));
             });
         Echo.private(`users.${userSlice?.id}`)
             .listen('MessagePrivateEvent', (e) => {
+                if (userCurrent?.id_user !== e.message?.to_this) {
+                    return false;
+                }
                 setRealTimeChat(oldArray => [...oldArray, e])
             });
     });
@@ -57,6 +60,7 @@ function Chat() {
             dispatch(removeIdUser());
             dispatch(getUserInChatBox(addUser));
         }
+        setRealTimeChat([]);
     };
 
     return (

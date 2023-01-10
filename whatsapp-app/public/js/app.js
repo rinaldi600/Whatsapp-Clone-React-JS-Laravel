@@ -4941,8 +4941,6 @@ function Dashboard(_ref) {
     return state.chatBoxUserDetail.value;
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log(notifications);
-    console.log(userInChatBox);
     sessionStorage.setItem("userDetail", JSON.stringify(user));
   });
   var showNavbar = function showNavbar() {
@@ -4958,7 +4956,6 @@ function Dashboard(_ref) {
     } else {
       setSticky(false);
     }
-    console.log(e.target.scrollTop);
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "relative",
@@ -5123,25 +5120,19 @@ function Dashboard(_ref) {
             },
             className: "overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2",
             children: getLatestChat.map(function (user) {
-              return (
-                /*#__PURE__*/
-                // <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : user.chats[0]['message']} id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
-                // <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : (notifications.hasOwnProperty(user.id_user) ? <span className={'font-medium'}>{notifications[user.id_user].message}</span> : user.chats[0]['message'])} id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
-                // <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : (notifications.hasOwnProperty(user.id_user) ? (userInChatBox.hasOwnProperty(user.id_user) ? (notifications[user.id_user].id_user === userInChatBox[user.id_user].idUser ? notifications[user.id_user].message : <span className={'font-medium'}>{notifications[user.id_user].message}</span> ) : <span className={'font-medium'}>{notifications[user.id_user].message}</span> ) : user.chats[0].message ) } id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
-                (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                  chat: user.chats.length <= 0 ? '' : notifications.hasOwnProperty(user.id_user) ? userInChatBox.hasOwnProperty(user.id_user) ? notifications[user.id_user].id_user === userInChatBox[user.id_user].idUser ? notifications[user.id_user].message : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                    className: 'font-medium',
-                    children: notifications[user.id_user].message
-                  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                    className: 'font-medium',
-                    children: notifications[user.id_user].message
-                  }) : user.chats[0].message,
-                  id: user.id,
-                  profile: user.photo_profile,
-                  name: user.name,
-                  idUser: user.id_user
-                }, user.id)
-              );
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                chat: user.chats.length <= 0 ? '' : notifications.hasOwnProperty(user.id_user) ? userInChatBox.hasOwnProperty(user.id_user) ? notifications[user.id_user].id_user === userInChatBox[user.id_user].idUser ? notifications[user.id_user].message : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                  className: 'font-medium',
+                  children: notifications[user.id_user].message
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                  className: 'font-medium',
+                  children: notifications[user.id_user].message
+                }) : user.chats[0].message,
+                id: user.id,
+                profile: user.photo_profile,
+                name: user.name,
+                idUser: user.id_user
+              }, user.id);
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -5574,7 +5565,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _features_getChats__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/features/getChats */ "./resources/js/features/getChats.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _features_getNotifications__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/features/getNotifications */ "./resources/js/features/getNotifications.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -5595,6 +5594,13 @@ function ProfileChatUser(_ref) {
   var chatLatest = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   var userInChatBox = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.chatBoxUserDetail.value;
+  });
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    readMessage = _useState2[0],
+    setRead = _useState2[1];
+  var notifications = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
+    return state.notificationsSlice.value;
   });
   var chatUser = function chatUser() {
     if (idUser !== '') {
@@ -5620,34 +5626,31 @@ function ProfileChatUser(_ref) {
       console.log("Tidak ada pesan terbaru");
     }
   };
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    console.log(userInChatBox);
-  });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
     onClick: chatUser,
     className: "flex hover:bg-[#F5F6F6] hover:rounded-[5px] mb-3 hover:p-2 gap-3 items-center cursor-pointer bg-white",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
       className: "w-[45px] h-[45px] overflow-hidden rounded-full bg-yellow-400",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
         referrerpolicy: "no-referrer",
         className: "w-full h-full",
         src: profile,
         alt: ""
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
       className: "flex justify-between w-[80%] border-b-[0.5px] border-[#E9EDEF]",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
         className: "mb-1",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
           className: "font-medium text-[#111b21] text-lg",
           children: name
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
           ref: chatLatest,
           className: "text-[#3b4a54] text-sm",
-          children: chat
+          children: readMessage ? readMessage : chat
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
           className: "text-[#1FA855] text-xs font-semibold",
           children: "19.40"
         })

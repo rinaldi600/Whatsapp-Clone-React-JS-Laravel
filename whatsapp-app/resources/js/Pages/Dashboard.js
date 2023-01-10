@@ -17,8 +17,6 @@ export default function Dashboard({user, getLatestChat}) {
     const userInChatBox = useSelector(state => state.chatBoxUserDetail.value);
 
     useEffect(() => {
-        console.log(notifications);
-        console.log(userInChatBox);
         sessionStorage.setItem("userDetail", JSON.stringify(user));
     });
 
@@ -36,7 +34,6 @@ export default function Dashboard({user, getLatestChat}) {
         } else {
             setSticky(false);
         }
-        console.log(e.target.scrollTop)
     };
 
     return (
@@ -110,9 +107,6 @@ export default function Dashboard({user, getLatestChat}) {
                         <div onScroll={(e) => getValue(e)} className={"overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2"}>
                             {
                                 getLatestChat.map((user) => (
-                                    // <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : user.chats[0]['message']} id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
-                                    // <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : (notifications.hasOwnProperty(user.id_user) ? <span className={'font-medium'}>{notifications[user.id_user].message}</span> : user.chats[0]['message'])} id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
-                                    // <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : (notifications.hasOwnProperty(user.id_user) ? (userInChatBox.hasOwnProperty(user.id_user) ? (notifications[user.id_user].id_user === userInChatBox[user.id_user].idUser ? notifications[user.id_user].message : <span className={'font-medium'}>{notifications[user.id_user].message}</span> ) : <span className={'font-medium'}>{notifications[user.id_user].message}</span> ) : user.chats[0].message ) } id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
                                     <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : (notifications.hasOwnProperty(user.id_user) ? (userInChatBox.hasOwnProperty(user.id_user) ? (notifications[user.id_user].id_user === userInChatBox[user.id_user].idUser ? notifications[user.id_user].message : <span className={'font-medium'}>{notifications[user.id_user].message}</span> ) : <span className={'font-medium'}>{notifications[user.id_user].message}</span> ) : user.chats[0].message ) } id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
                                 ))
                             }
