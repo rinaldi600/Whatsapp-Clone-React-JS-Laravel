@@ -13,7 +13,9 @@ class AddColumnReadTableChats extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('chats', function (Blueprint $table) {
+            $table->boolean('is_read')->default(true)->after('message'); // use this for field after specific column.
+        });
     }
 
     /**
@@ -23,6 +25,8 @@ class AddColumnReadTableChats extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('chats', function (Blueprint $table) {
+            $table->dropColumn('is_read');
+        });
     }
 }

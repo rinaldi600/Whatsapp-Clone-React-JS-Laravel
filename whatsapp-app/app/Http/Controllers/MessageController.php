@@ -48,6 +48,7 @@ class MessageController extends Controller
             'from_this' => Auth::user()['id_user'],
             'to_this' => $request->input('to_this'),
             'message' => $request->input('message'),
+            'is_read' => false
         ];
 
         Chat::create($data);
@@ -62,9 +63,19 @@ class MessageController extends Controller
         $userSendNotification->notify(new RealTimeNotification(array(
             'id_user' => Auth::user()['id_user'],
             'message' => $request->input('message'),
+            'detail' => $detailChat
         )));
         return Redirect::back()->with([
             'success' => 'WORK'
+        ]);
+    }
+
+    public function readChat(Request $request) {
+        $resChatUpdate = Chat::where('id_chat', $request->input('id_chat'))->update(['is_read' => true]);
+        $chatDetail = Chat::where('id_chat', $request->input('id_chat'))->first();
+        return response()->json([
+           'responseUpdate' => $chatDetail,
+           'chatDetail' => $resChatUpdate,
         ]);
     }
 }

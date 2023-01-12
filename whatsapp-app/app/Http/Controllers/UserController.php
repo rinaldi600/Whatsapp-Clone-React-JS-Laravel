@@ -18,7 +18,9 @@ class UserController extends Controller
         return Inertia::render('Dashboard',[
             'user' => \Illuminate\Support\Facades\Auth::user(),
             'getLatestChat' => User::with(['chats' => function ($query) {
-                    $query->where('to_this', Auth::user()['id_user'])->orderBy('updated_at','desc')->first();
+                    $query->where('from_this', Auth::user()['id_user'])
+                        ->orWhere('to_this', Auth::user()['id_user'])
+                        ->orderBy('updated_at','desc')->first();
             }])->where('id_user','!=', Auth::user()['id_user'])->get(),
         ]);
 

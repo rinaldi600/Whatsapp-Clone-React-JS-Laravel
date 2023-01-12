@@ -4941,6 +4941,7 @@ function Dashboard(_ref) {
     return state.chatBoxUserDetail.value;
   });
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log(getLatestChat);
     sessionStorage.setItem("userDetail", JSON.stringify(user));
   });
   var showNavbar = function showNavbar() {
@@ -5120,19 +5121,17 @@ function Dashboard(_ref) {
             },
             className: "overflow-y-scroll scrollbar-hide h-[700px] pl-5 pr-5 pt-2",
             children: getLatestChat.map(function (user) {
-              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                chat: user.chats.length <= 0 ? '' : notifications.hasOwnProperty(user.id_user) ? userInChatBox.hasOwnProperty(user.id_user) ? notifications[user.id_user].id_user === userInChatBox[user.id_user].idUser ? notifications[user.id_user].message : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                  className: 'font-medium',
-                  children: notifications[user.id_user].message
-                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                  className: 'font-medium',
-                  children: notifications[user.id_user].message
-                }) : user.chats[0].message,
-                id: user.id,
-                profile: user.photo_profile,
-                name: user.name,
-                idUser: user.id_user
-              }, user.id);
+              return (
+                /*#__PURE__*/
+                // <ProfileChatUser key={user.id} chat={user.chats.length <= 0 ? '' : (notifications.hasOwnProperty(user.id_user) ? (userInChatBox.hasOwnProperty(user.id_user) ? (notifications[user.id_user].id_user === userInChatBox[user.id_user].idUser ? notifications[user.id_user].message : <span className={'font-medium'}>{notifications[user.id_user].message}</span> ) : <span className={'font-medium'}>{notifications[user.id_user].message}</span> ) : user.chats[0].message ) } id={user.id} profile={user.photo_profile} name={user.name} idUser={user.id_user}/>
+                (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Pages_ProfileChatUser_ProfileChatUser__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                  chat: user.chats.length <= 0 ? '' : user.chats[0].message,
+                  id: user.id,
+                  profile: user.photo_profile,
+                  name: user.name,
+                  idUser: user.id_user
+                }, user.id)
+              );
             })
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -5595,10 +5594,15 @@ function ProfileChatUser(_ref) {
   var userInChatBox = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.chatBoxUserDetail.value;
   });
+  // const [readMessage, setRead] = useState('');
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState2 = _slicedToArray(_useState, 2),
-    readMessage = _useState2[0],
-    setRead = _useState2[1];
+    idChat = _useState2[0],
+    setIdChat = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    chatLatestText = _useState4[0],
+    getChatLatest = _useState4[1];
   var notifications = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(function (state) {
     return state.notificationsSlice.value;
   });
@@ -5618,14 +5622,39 @@ function ProfileChatUser(_ref) {
     }));
     dispatch((0,_features_modalBoxChat__WEBPACK_IMPORTED_MODULE_3__.close)());
     dispatch((0,_features_modalBox__WEBPACK_IMPORTED_MODULE_1__.show)());
-    try {
-      if (chatLatest.current.childNodes.length > 0) {
-        chatLatest.current.childNodes[0].classList.remove("font-medium");
-      }
-    } catch (e) {
-      console.log("Tidak ada pesan terbaru");
+
+    // try {
+    //     if (chatLatest.current.childNodes.length > 0) {
+    //         chatLatest.current.childNodes[0].classList.remove("font-medium");
+    //     }
+    // } catch (e) {
+    //     console.log("Tidak ada pesan terbaru")
+    // }
+
+    if (idChat) {
+      axios__WEBPACK_IMPORTED_MODULE_6___default().post('/read_chat', {
+        id_chat: idChat
+      }).then(function (success) {
+        // if (success.data.res === 1) {
+        //
+        // }
+        console.log(success);
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (notifications.hasOwnProperty(idUser)) {
+      chatLatest.current.classList.add('font-medium');
+      getChatLatest(notifications[idUser].detail.message);
+      setIdChat(notifications[idUser].detail.id_chat);
+      // if (userInChatBox.hasOwnProperty(idUser)) {
+      //     getChatLatest(notifications[idUser].detail.message);
+      // }
+    }
+  });
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
     onClick: chatUser,
     className: "flex hover:bg-[#F5F6F6] hover:rounded-[5px] mb-3 hover:p-2 gap-3 items-center cursor-pointer bg-white",
@@ -5645,9 +5674,11 @@ function ProfileChatUser(_ref) {
           className: "font-medium text-[#111b21] text-lg",
           children: name
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
-          ref: chatLatest,
           className: "text-[#3b4a54] text-sm",
-          children: readMessage ? readMessage : chat
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+            ref: chatLatest,
+            children: chat
+          })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
