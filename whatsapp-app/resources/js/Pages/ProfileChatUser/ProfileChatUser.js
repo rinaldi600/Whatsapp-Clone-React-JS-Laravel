@@ -5,7 +5,6 @@ import {close} from "@/features/modalBoxChat";
 import {getDetail} from '@/features/getDetailUser';
 import {chatsFetch} from '@/features/getChats';
 import axios from "axios";
-import {addNotifications} from "@/features/getNotifications";
 
 function ProfileChatUser({profile, name, idUser, id, chat}) {
 
@@ -13,7 +12,6 @@ function ProfileChatUser({profile, name, idUser, id, chat}) {
     const userCurrent = JSON.parse(sessionStorage.getItem('userDetail'));
     const chatLatest = useRef(null);
     const userInChatBox = useSelector(state => state.chatBoxUserDetail.value);
-    // const [readMessage, setRead] = useState('');
     const [idChat, setIdChat] = useState('');
     const [chatLatestText, getChatLatest] = useState('');
     const notifications = useSelector(state => state.notificationsSlice.value);
@@ -37,38 +35,82 @@ function ProfileChatUser({profile, name, idUser, id, chat}) {
         dispatch(close());
         dispatch(show());
 
-        // try {
-        //     if (chatLatest.current.childNodes.length > 0) {
-        //         chatLatest.current.childNodes[0].classList.remove("font-medium");
-        //     }
-        // } catch (e) {
-        //     console.log("Tidak ada pesan terbaru")
-        // }
-
-        if (idChat) {
-            axios.post('/read_chat', {
-                id_chat : idChat,
-            })
+        if (idChat || userInChatBox.hasOwnProperty(idUser)) {
+            readChat(idChat)
                 .then((success) => {
-                    // if (success.data.res === 1) {
-                    //
-                    // }
+                    if (success.data.responseUpdate === 1) {
+                        chatLatest.current.classList.remove('font-medium');
+                    }
                     console.log(success);
                 })
                 .catch((error) => {
                     console.log(error);
                 })
+            // axios.post('/read_chat', {
+            //     id_chat : idChat,
+            // })
+            //     .then((success) => {
+            //         if (success.data.responseUpdate === 1) {
+            //             chatLatest.current.classList.remove('font-medium');
+            //         }
+            //         console.log(success);
+            //     })
+            //     .catch((error) => {
+            //         console.log(error);
+            //     })
         }
+    };
+
+    const readChat = async (idChat) => {
+        return axios.post('/read_chat', {
+            id_chat : idChat
+        })
     };
 
     useEffect(() => {
         if (notifications.hasOwnProperty(idUser)) {
-            chatLatest.current.classList.add('font-medium');
+
+            axios.get(`/check_chat/${notifications[idUser].detail.id_chat}`)
+                .then((success) => {
+                    if (success.data.chatCheck.is_read === 0) {
+                        chatLatest.current.classList.add('font-medium');
+                    } else {
+                        chatLatest.current.classList.remove('font-medium');
+                    }
+
+                    if (userInChatBox.hasOwnProperty(notifications[idUser].id_user)) {
+                        readChat(notifications[idUser].detail.id_chat)
+                            .then((success) => {
+                                if (success.data.responseUpdate === 1) {
+                                    chatLatest.current.classList.remove('font-medium');
+                                }
+                                console.log(success);
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                        // chatLatest.current.classList.remove('font-medium');
+                    }
+
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
             getChatLatest(notifications[idUser].detail.message);
             setIdChat(notifications[idUser].detail.id_chat);
-            // if (userInChatBox.hasOwnProperty(idUser)) {
-            //     getChatLatest(notifications[idUser].detail.message);
-            // }
+
+            axios.post('/read_all_chat', {
+                id_chat : notifications[idUser].detail.id_chat,
+                from_this : idUser,
+                to_this : userCurrent?.id_user,
+            })
+                .then((success) => {
+                    console.log(success);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
         }
     });
 
@@ -83,7 +125,7 @@ function ProfileChatUser({profile, name, idUser, id, chat}) {
                     {/*<p ref={chatLatest} className={"text-[#3b4a54] text-sm"}>{readMessage ? readMessage : chat}</p>*/}
                     {/*<p ref={chatLatest} className={"text-[#3b4a54] text-sm"}>*/}
                     <p className={"text-[#3b4a54] text-sm"}>
-                        <span ref={chatLatest}>{chat}</span>
+                        <span ref={chatLatest}>{chatLatestText ? chatLatestText : chat}</span>
                     </p>
                 </div>
                 <div>

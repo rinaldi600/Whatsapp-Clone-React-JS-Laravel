@@ -61,6 +61,7 @@ function Chat() {
             dispatch(getUserInChatBox(addUser));
         }
         setRealTimeChat([]);
+
     };
 
     return (

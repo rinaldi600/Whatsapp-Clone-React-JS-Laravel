@@ -26,6 +26,8 @@ Route::get('/auth/google/callback',[UserController::class,'handleGoogleCallback'
 Route::get('/chats/{from_this}/{to_this}', [\App\Http\Controllers\MessageController::class, 'index'])->middleware('authUserLogin');
 Route::post('/post/chat', [\App\Http\Controllers\MessageController::class, 'store'])->middleware('authUserLogin');
 Route::post('/read_chat', [\App\Http\Controllers\MessageController::class, 'readChat'])->middleware('authUserLogin');
+Route::post('/read_all_chat', [\App\Http\Controllers\MessageController::class, 'readAllChat'])->middleware('authUserLogin');
+Route::get('/check_chat/{chat:id_chat}', [\App\Http\Controllers\MessageController::class, 'checkChat'])->middleware('authUserLogin');
 
 Route::get('/user', [UserController::class, 'index'])->middleware('authUserLogin');
 

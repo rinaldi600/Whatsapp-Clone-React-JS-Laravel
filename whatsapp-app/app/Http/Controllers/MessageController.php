@@ -71,11 +71,39 @@ class MessageController extends Controller
     }
 
     public function readChat(Request $request) {
-        $resChatUpdate = Chat::where('id_chat', $request->input('id_chat'))->update(['is_read' => true]);
         $chatDetail = Chat::where('id_chat', $request->input('id_chat'))->first();
+
+        if ($chatDetail['is_read'] === 0) {
+            Chat::where('id_chat', $request->input('id_chat'))->update(['is_read' => true]);
+            return response()->json([
+                'responseUpdate' => 1,
+                'chatDetail' => $chatDetail,
+            ]);
+        } else {
+            return response()->json([
+                'responseUpdate' => 1,
+                'chatDetail' => $chatDetail,
+            ]);
+        }
+    }
+
+    public function readAllChat(Request $request) {
+        Chat::where('id_chat','!=',$request->input('id_chat'))
+            ->where('from_this',$request->input('from_this'))
+            ->where('to_this',$request->input('to_this'))
+            ->where('is_read', false)
+            ->update([
+                'is_read' => true
+            ]);
+
         return response()->json([
-           'responseUpdate' => $chatDetail,
-           'chatDetail' => $resChatUpdate,
+            'response' => 'success'
+        ]);
+    }
+
+    public function checkChat(Chat $chat) {
+        return response()->json([
+            'chatCheck' => $chat,
         ]);
     }
 }
